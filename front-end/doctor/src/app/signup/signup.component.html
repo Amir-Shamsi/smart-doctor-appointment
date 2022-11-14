@@ -1,0 +1,128 @@
+<!-- <head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<div class="">
+  <form [formGroup]="form"  class="" panelClass="kk">
+    <mat-form-field appearance="fill" panelClass="kk">
+      <mat-label class="f-vasir">نوع کاربر</mat-label>
+      <mat-select [formControl]="userControl" name="user" [(value)] = "select" panelClass="dropDown-seasons-panel" >
+
+        <mat-option *ngFor="let user of types" [value]="user.value" >
+          {{user.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  </div>
+  <div>
+  <div class="">
+    <ng-container [ngSwitch]="select">
+    <div *ngSwitchCase="'user'">
+      <div class="">
+        <div class="example-container">
+          <mat-form-field appearance="legacy">
+            <mat-label class="f-vasir">نام</mat-label>
+            <input matInput [(ngModel)]= "signUpUserData.firstName" name="firstname" >
+          </mat-form-field>
+        </div>
+      </div>
+        <br>
+        <div class="">
+          <div class="example-container">
+            <mat-form-field appearance="legacy">
+              <mat-label class="f-vasir">نام خانوادگی</mat-label>
+              <input matInput [(ngModel)]= "signUpUserData.lastName" name="lastname">
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <div class="">
+        <div class="example-container">
+          <mat-form-field appearance="legacy" hideRequiredMarker>
+            <mat-label class="f-vasir">نام کاربری</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="info" required [(ngModel)]= "signUpUserData.userName" name="username">
+            <mat-error *ngIf="info.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+        <br>
+        <div class="example-container">
+          <mat-form-field appearance="legacy" hideRequiredMarker>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="button-hide">
+              <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-label class="f-vasir">رمز عبور</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="info" required [(ngModel)]= "signUpUserData.password" name="password">
+            <mat-error *ngIf="info.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+        </div>
+        <br>
+        <div>
+        <form class="example-form">
+          <mat-form-field class="example-full-width" appearance="legacy" hideRequiredMarker>
+            <mat-label class="f-vasir">تلفن</mat-label>
+            <input type="tel" matInput placeholder="0912-345-6789" maxlength="11" (keypress)="numberOnly($event)" [formControl]="info" required [(ngModel)]= "signUpUserData.phone" name="phone">
+            <mat-error *ngIf="info.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-center">
+        <button type="submit" class=" btn btn-primary btn-p button-radius mt-2 f-vasir" (click)="signUpUser()">ثبت نام</button>
+
+      </div>
+    </div>
+    <div *ngSwitchCase="'legal'">
+      <div class="">
+        <div class="example-container">
+          <mat-form-field appearance="legacy">
+            <mat-label class="f-vasir">نام شرکت</mat-label>
+            <input matInput [(ngModel)]= "signUpLegalData.companyName" name="companyName">
+          </mat-form-field>
+        </div>
+      </div>
+
+        <br>
+        <div class="">
+        <div class="example-container">
+          <mat-form-field appearance="legacy" hideRequiredMarker>
+            <mat-label class="f-vasir">نام کاربری</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="info" required [(ngModel)]= "signUpLegalData.userName" name="username">
+            <mat-error *ngIf="info.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+        <br>
+        <div class="example-container" style=" direction: rtl;">
+          <mat-form-field appearance="legacy" hideRequiredMarker>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" class="button-hide">
+              <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-label class="f-vasir">رمز عبور</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="info" required [(ngModel)]= "signUpLegalData.password" name="password">
+            <mat-error *ngIf="info.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <br>
+          <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="legacy" hideRequiredMarker>
+              <mat-label class="f-vasir">تلفن</mat-label>
+              <input type="tel" matInput placeholder="0912-345-6789" maxlength="11" (keypress)="numberOnly($event)" [formControl]="info" required [(ngModel)]= "signUpLegalData.phone" name="phone">
+              <mat-error *ngIf="info.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </form>
+
+        </div>
+      <br><br><br><br>
+
+
+        <div class="d-flex align-items-center justify-content-center">
+          <button type="button" class="btn btn-primary button-radius mt-2 btn-p f-vasir" (click)="signUpLegal()"> ثبت نام</button>
+
+        </div>
+    </div>
+  </ng-container>
+  </div>
+</div> -->

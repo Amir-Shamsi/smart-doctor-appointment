@@ -1,0 +1,65 @@
+.s{
+  display: flex;
+  max-width: 10%;
+  height: 10px;
+}
+.top{
+  top: 0px;
+}
+.col {
+  margin-top: 12px;
+    display: inline-block;
+    position: relative;
+}
+
+.button-hide:focus {
+    outline: none;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+  margin-top: 10px;
+  width: 100px;
+}
+.mat{
+  width: 100px;
+  text-align: right;
+}
+input.mat-input-element {
+  height:20px;
+
+}
+.mat-form-field{
+  width: 50px;
+}
+.button-hide {
+  border: 0;
+  background-color: white;
+  direction: rtl;
+}
+input.mat-input-element {
+  height:20px;
+
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+
+.button-radius{
+  border-radius:10em;
+  padding:0.3em 3em;
+}
+.btn-p:focus {
+  outline: none;
+  box-shadow: none;
+}
+.mat-icon{
+  font-size: 15px !important;
+}

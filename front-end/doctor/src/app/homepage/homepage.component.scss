@@ -1,0 +1,19 @@
+// 08A29E
+*{
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.header-text{
+  background: transparent;
+  border: none;
+  margin-right: 6rem;
+  font-size: 16px;
+}
