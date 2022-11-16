@@ -29,7 +29,7 @@ class CustomUser(AbstractUser):
     birth_date = models.DateField()
     gender = models.BooleanField()
     contact_number = models.CharField(max_length=11)
-    email = models.CharField(null=True, blank=True)
+    email = models.CharField(null=True, blank=True, max_length=255)
     zip_code = models.CharField(max_length=64)
     has_health_insurance = models.BooleanField(default=0)
     health_insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.PROTECT)
@@ -46,4 +46,4 @@ class CustomUser(AbstractUser):
 
 class PatientFile(models.Model):
     patient = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    file_ID = models.CharField(unique=True, default=uuid.uuid4().hex[:6].upper())
+    file_ID = models.CharField(unique=True, default=uuid.uuid4().hex[:6].upper(), max_length=6)
