@@ -22,13 +22,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
-
+import { RegisterComponent } from './register/register.component';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     SignupComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +39,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatGridListModule,
+    MatCardModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
