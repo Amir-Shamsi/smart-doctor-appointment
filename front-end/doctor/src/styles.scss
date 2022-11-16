@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: juana, "Helvetica Neue", sans-serif; }
 
 @font-face {
   font-family: "Degan";
@@ -11,4 +11,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @font-face {
   font-family: "Apotik";
   src: url("./assets/fonts/Apotik-6Y85Y.ttf");
+}
+
+@font-face {
+  font-family: "juana";
+  src: url("./assets/fonts/juana-semi-bold.ttf");
+}
+
+.mat-body,
+.mat-body-1,
+.mat-typography .mat-body,
+.mat-typography .mat-body-1,
+.mat-typography {
+  font-family: juana !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+span,
+div,
+p,
+input,
+button,
+a {
+  font-family: juana !important;
 }

@@ -1,66 +1,122 @@
 <div>
   <mat-toolbar style="background: transparent;margin-top: 1.5rem; padding-right: 4rem;">
-    <span style="padding-left: 4rem;font-family: Apotik;font-weight: bold;font-size: 30px;color: #027e7a;">WE❤CARE</span>
+    <div>
+    </div>
+    <span style="padding-left: 4rem;font-family: juana;font-weight: bold;font-size: 30px;color: #027e7a;">WeCare</span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="header-text" style="margin-right: 3rem;">
       <span>
-        HOME
+        Home
       </span>
     </button>
     <button mat-icon-button class="header-text">
       <span>
-        ABOUT US
+        About Us
       </span>
     </button>
-    <button mat-flat-button style="font-size: 16px;background-color: #534b4b;">
-      <span style="color: white;">
-        LOGIN / SIGNUP
-      </span>
+    <button style="font-size: 16px;border-color: #027e7a;border-width: medium;border-radius: 50px;">
+      <a style="text-decoration: none;" [routerLink]="['/register']">
+      <span style="color: rgb(0, 0, 0);">
+        Login / Signup
+    </span>
+  </a>
     </button>
   </mat-toolbar>
 </div>
 
-<div style="text-align: right; padding-top: 2rem;
-align-items: center;
-justify-content: center" data-aos="fade-right"
+<mat-grid-list style="margin-top: 5rem;" cols="5" rowHeight="3:5">
+  <mat-grid-tile [colspan]=3>
+    <div style="position: absolute;">
+    <h1 style="font-size: 40px;font-weight: bold;padding-bottom: 10rem;">WE CARE ABOUT YOUR HEALTH<br/><br/></h1>
+    </div>
+    <div style="position: absolute;">
+    <p style="font-size: 20px;">Easy online appointment with best specialists<br/><br/><br/><br/></p>
+    </div>
+    <div style="position: absolute;padding-top: 10rem;">
+    <button style="border-color: #027e7a;border-width: thick;font-size: 30px;color: black;width: 430px;height: 80px;border-radius: 50px;">
+      <a>BOOK NOW</a>
+    </button>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]=2>
+    <div style="justify-content: center" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-sine">
+   <img style="width: 500px;height: 500px;margin-right: 3rem;" src="../../assets/gifs/main.gif">
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+<mat-grid-list cols="5" rowHeight="3:5">
+  <mat-grid-tile [colspan]=2>
+    <div style="justify-content: center" data-aos="fade-right"
   data-aos-duration="1000"
   data-aos-easing="ease-in-sine">
-  <div style="display: inline-block; padding-right: 10rem;text-align: left;margin-top: 5rem;">
-  <h1 style="font-size: 35px;font-weight: bold;">WE CARE ABOUT YOUR HEALTH<br/><br/></h1>
-  <p style="font-size: 20px;">Easy online appointment with best specialists<br/><br/><br/><br/></p>
-  <button style="background-color: #027e7a;border: none;width: 400px;height: 100px;font-size: 30px;color: white;">BOOK NOW</button>
-</div>
-<img style="width: 500px;height: 500px;margin-right: 4rem;" src="../../assets/gifs/main.gif" alt="appont">
+    <img style="width: 450px;height: 450px;margin-left: 3rem;" src="../../assets/gifs/symptoms.gif">
+  </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]=3>
+    <div>
+      <p style="font-size: 25px;">Enter symptoms and get relevant prognosis <br/><br/><br/>based on our smart AI methods</p>
     </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
 
+<mat-grid-list cols="5" rowHeight="3:5">
+  <mat-grid-tile [colspan]=3>
+    <div style="position: absolute;">
+      <p style="font-size: 25px;">We recommend best specialists <br/><br/><br/>to help and cure you</p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]=2>
+    <div style="justify-content: center" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-sine">
+   <img style="width: 550px;height: 550px;margin-right: 3rem;" src="../../assets/gifs/Doctor.gif">
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
-<div style="text-align: left;padding-top: 2rem;" data-aos="fade-left"
-      data-aos-duration="1000"
-     data-aos-easing="ease-in-sine">
-     <img style="width: 500px;height: 500px;padding-left: 4rem;" src="../../assets/gifs/symptoms.gif" alt="symptoms">
-</div>
 
-<div style="text-align: right;padding-top: 2rem;" data-aos="fade-right"
-      data-aos-duration="1000"
-     data-aos-easing="ease-in-sine">
-     <img style="width: 500px;height: 500px;padding-right: 4rem;" src="../../assets/gifs/Doctor.gif" alt="Doctor">
-</div>
+<mat-grid-list cols="5" rowHeight="3:5">
+  <mat-grid-tile [colspan]=2>
+    <div style="justify-content: center" data-aos="fade-right"
+  data-aos-duration="1000"
+  data-aos-easing="ease-in-sine">
+    <img style="width: 450px;height: 450px;margin-left: 3rem;" src="../../assets/gifs/prescription.gif">
+  </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]=3>
+    <div style="position: absolute;">
+      <p style="font-size: 25px;">Get online prescription from specialists</p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
-<div style="text-align: left;padding-top: 2rem;" data-aos="fade-left"
-      data-aos-duration="1000"
-     data-aos-easing="ease-in-sine">
-     <img style="width: 500px;height: 500px;padding-left: 4rem;" src="../../assets/gifs/prescription.gif" alt="prescription">
-</div>
 
-<div style="text-align: right;padding-top: 2rem;padding-right: 4rem;" data-aos="fade-right"
-      data-aos-duration="1000"
-     data-aos-easing="ease-in-sine">
-     <img style="width: 500px;height: 500px;" src="../../assets/gifs/chat.gif" alt="wecare">
-</div>
+<mat-grid-list cols="5" rowHeight="3:5">
+  <mat-grid-tile [colspan]=3>
+    <div style="position: absolute;">
+        <p style="font-size: 25px;">Have an online chat with any specialist<br/><br/><br/> about your health</p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]=2>
+    <div style="justify-content: center" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-sine">
+   <img style="width: 550px;height: 550px;margin-right: 3rem;" src="../../assets/gifs/chat.gif">
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
-<div style="text-align: center;padding-top: 2rem;" data-aos="fade-right"
-      data-aos-duration="1000"
-     data-aos-easing="ease-in-sine">
-     <img style="width: 500px;height: 500px;" src="../../assets/gifs/wecare.gif" alt="wecare">
-</div>
+
+  <mat-grid-list cols="5" rowHeight="3:5">
+    <mat-grid-tile [colspan]=2>
+      <div style="justify-content: center" data-aos="fade-right"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-sine">
+    <img style="width: 550px;height: 450px;padding-left: 3rem;" src="../../assets/gifs/wecare.gif">
+    </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=3>
+      <div style="position: absolute;">
+        <p style="font-size: 35px;padding-top: 9rem;">WE DO CARE ABOUT YOUR HEALTH</p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>

@@ -1,0 +1,115 @@
+<mat-grid-list cols="2">
+  <mat-grid-tile [colspan]="1">
+    <div *ngIf="selected.value==0">
+    <img style="width: 600px;height: 600px;" src="../../assets/gifs/login.gif">
+  </div>
+  <div *ngIf="selected.value==1">
+    <img style="width: 600px;height: 600px;" src="../../assets/gifs/Signup.gif">
+  </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1">
+    <mat-tab-group mat-align-tabs="center" animationDuration="1000ms" [selectedIndex]="selected.value"
+    (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+        <div *ngIf="selected.value==0" >
+        <mat-card style="width: 500px;height: 500px;background-color: #08a29d25;">
+              <form [formGroup]="form">
+
+                <mat-form-field style="display: inline-block;width: 200px;">
+                <input matInput placeholder="First Name" maxlength="100" [required]="true"/>
+                </mat-form-field>
+
+                <mat-form-field style="display: inline-block;width: 200px;margin-left: 2rem;">
+                  <input matInput placeholder="Last Name" maxlength="100" [required]="true"/>
+                  </mat-form-field>
+
+                  <mat-form-field style="width: 100px;">
+                    <mat-label>Birth Date</mat-label>
+                    <input matInput [matDatepicker]="picker" [required]="true">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field style="margin-left: 2rem;width: 100px;">
+                    <mat-label>Gender</mat-label>
+                    <mat-select name="gender" [required]="true">
+                      <mat-option *ngFor="let gen of gender" [value]="gen.value">
+                        {{gen.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field style="margin-left: 2rem;width: 170px;">
+                    <mat-label>Contact Number</mat-label>
+                    <input type="tel" matInput placeholder="09123456789" [required]="true">
+                  </mat-form-field>
+
+                  <mat-form-field style="width: 435px;">
+                    <mat-label>Email Address</mat-label>
+                    <input type="email" matInput placeholder="Exm@example.com" [required]="true">
+                  </mat-form-field>
+
+                  <mat-form-field style="width: 100px;">
+                    <mat-label>State/Province</mat-label>
+                    <mat-select name="state" [required]="true">
+                      <mat-option *ngFor="let st of state" [value]="st.value">
+                        {{st.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field style="margin-left: 2rem;width: 100px;">
+                    <mat-label>City</mat-label>
+                    <mat-select name="city" [required]="true">
+                      <mat-option *ngFor="let ct of city" [value]="ct.value">
+                        {{ct.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field style="margin-left: 2rem;width: 170px;">
+                    <mat-label>Zip Code</mat-label>
+                    <input type="number" matInput placeholder="1234" [required]="true">
+                  </mat-form-field>
+
+                  <mat-radio-group>
+                    <mat-radio-button style="margin-top: 1.5rem;" value="1">Self Pay</mat-radio-button>
+                    <mat-radio-button style="margin-left: 2rem;" value="2">Health Insurance</mat-radio-button>
+                  </mat-radio-group>
+                  <div>
+                    {{select}}
+                  </div>
+
+                  <mat-form-field style="margin-top: 1.5rem;width: 170px;">
+                    <mat-label>Insurance ID</mat-label>
+                    <input type="number" matInput placeholder="1234" [required]="true">
+                  </mat-form-field>
+
+                  <div style="margin-top: 3rem;text-align: center;">
+                  <button style="width: 300px;height: 50px;font-size: 26px;border: none;background-color: rgb(143, 224, 143);" color="primary" type="submit">Sign Up</button>
+                </div>
+              </form>
+        </mat-card>
+        </div>
+        <div *ngIf="selected.value==1">
+        <mat-card style="width: 500px;height: 500px;background-color: #08a29d25;">
+          <form [formGroup]="form">
+
+            <mat-form-field style="width: 100%;">
+            <input matInput placeholder="First Name" maxlength="100" [required]="true"/>
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;">
+              <input matInput placeholder="Last Name" maxlength="100" [required]="true"/>
+              </mat-form-field>
+
+              <div style="margin-top: 3rem;text-align: center;">
+              <button style="width: 300px;height: 50px;font-size: 26px;border: none;background-color: rgb(143, 224, 143);" color="primary" type="submit">LogIn</button>
+            </div>
+          </form>
+        </mat-card>
+       </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-grid-tile>
+</mat-grid-list>
