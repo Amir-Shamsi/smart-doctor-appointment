@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { MatOptionSelectionChange } from '@angular/material/core';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { MatRadioChange } from '@angular/material/radio';
 
 interface choice {
   value: string;
@@ -19,9 +21,18 @@ interface choice {
 export class RegisterComponent implements OnInit {
   tabs = ['SignUp', 'Login'];
   selected = new FormControl(0);
-  form: FormGroup | any;
+  form1: FormGroup | any;
+  form2: FormGroup | any;
 
   selectedValue: string | any;
+
+  radioSelected : any;
+  stateSelected : any;
+  citySelected : any;
+  healthSelected : any;
+  genderSelected : any;
+
+  hide = true;
 
   gender: choice[] = [
     {value: 'Female', viewValue: 'Female'},
@@ -42,21 +53,80 @@ export class RegisterComponent implements OnInit {
     {value: 'city4', viewValue: 'city4'},
   ];
 
+  Health: choice[] = [
+    {value: 'Health1', viewValue: 'Health1'},
+    {value: 'Health2', viewValue: 'Health2'},
+    {value: 'Health3', viewValue: 'Health3'},
+    {value: 'Health4', viewValue: 'Health4'},
+  ]
   select: string | any;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.initform();
+    this.initForm1();
+    this.initForm2();
   }
 
-  private initform(){
-    let surveyTitle = '';
-
-    this.form = new FormGroup({
-      'surveyTitle': new FormControl(surveyTitle, [Validators.required]),
+  private initForm1(){
+    this.form1 = new FormGroup({
+      'nationalCode': new FormControl('', [Validators.required]),
+      'password': new FormControl('' , [Validators.required]),
+      'firstName': new FormControl('', [Validators.required]),
+      'lastName': new FormControl('', [Validators.required]),
+      'birthDate': new FormControl('', [Validators.required]),
+      'contactNumber': new FormControl('', [Validators.required]),
+      'email': new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+        Validators.pattern(
+          '^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$'
+        ),
+      ]),
+      'zipCode': new FormControl('', [Validators.required]),
+      'insuranceId': new FormControl('', [Validators.required]),
  })
-  }
+}
 
+private initForm2(){
+  this.form2 = new FormGroup({
+    'nationalCode': new FormControl('', [Validators.required]),
+      'password': new FormControl('' , [Validators.required]),
+  })
+}
+
+radioButtonChange(data: MatRadioChange) {
+  console.log(data.value);
+    this.radioSelected = data.value;
+}
+
+genderChange(data: MatOptionSelectionChange){
+  console.log(data);
+  this.genderSelected = data;
+}
+
+cityChange(data: MatOptionSelectionChange){
+  console.log(data);
+  this.citySelected = data;
+}
+
+stateChange(data: MatOptionSelectionChange){
+  console.log(data);
+  this.stateSelected = data;
+}
+
+healthChange(data: MatOptionSelectionChange){
+  console.log(data);
+  this.healthSelected = data;
+}
+
+onSubmit1(){
+  console.log(this.form1.value);
+}
+
+onSubmit2(){
+  console.log(this.form2.value);
+}
 
 }
