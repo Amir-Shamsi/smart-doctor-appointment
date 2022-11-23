@@ -46,4 +46,22 @@ class PasswordHandler:
         except: return Response({'Something went wrong! we\'re unable to sent email, Try later again.'})
         return Response({'Check your index and spam! Password Rest URL sent to your email.'})
 
-# Create your views here.
+    @staticmethod
+    @api_view(['POST'])
+    def password_reset(request):
+        token = request.GET['token']
+        print(token)
+        try: uht = UserHashTable.objects.get(key='password-reset', value=token)
+        except: uht = None
+        if not token or not uht: return Response({'Token is not valid.'})
+        if not uht.expire_date.replace(tzinfo=pytz.UTC) >= datetime.datetime.now().replace(tzinfo=pytz.UTC):
+            return Response({'Token has been expired.'})
+        user = CustomUser.objects.get(personal_ID=uht.user.personal_ID)
+        serializer = ResetPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user.set_password(serializer.validated_data['password'])
+        user.save()
+        uht.delete()
+        return Response({'Password changed successfully.'})
+
+
