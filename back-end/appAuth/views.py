@@ -5,7 +5,9 @@ from django.template.loader import get_template
 from rest_framework import status
 from django.core.mail import EmailMultiAlternatives
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializers import *
 
@@ -64,4 +66,9 @@ class PasswordHandler:
         uht.delete()
         return Response({'Password changed successfully.'})
 
+
+class AddProvinceByAdminViewSet(ModelViewSet):
+    permission_classes = [IsAdminUser]
+    serializer_class = ProvinceSeriailizer
+    queryset = ProvinceState.objects.all()
 
