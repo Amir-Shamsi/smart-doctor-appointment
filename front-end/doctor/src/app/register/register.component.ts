@@ -3,7 +3,10 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatRadioChange } from '@angular/material/radio';
-
+import { Router } from '@angular/router';
+import { PostService } from 'src/services/post.service';
+import City from '../../assets/city.json';
+import State from '../../assets/State.json';
 interface choice {
   value: string;
   viewValue: string;
@@ -19,15 +22,21 @@ interface choice {
 }]
 })
 export class RegisterComponent implements OnInit {
+  cities: any = City;
+  states:any = State;
+
   tabs = ['SignUp', 'Login'];
   selected = new FormControl(0);
   form1: FormGroup | any;
   form2: FormGroup | any;
 
+  hasHealth: boolean = false;
+
   selectedValue: string | any;
 
   radioSelected : any;
   stateSelected : any;
+  selectedJson : [] | any;
   citySelected : any;
   healthSelected : any;
   genderSelected : any;
@@ -39,19 +48,19 @@ export class RegisterComponent implements OnInit {
     {value: 'Male', viewValue: 'Male'},
   ];
 
-  state: choice[] = [
-    {value: 'state1', viewValue: 'state1'},
-    {value: 'state2', viewValue: 'state2'},
-    {value: 'state3', viewValue: 'state3'},
-    {value: 'state4', viewValue: 'state4'},
-  ];
+  // state: choice[] = [
+  //   {value: 'state1', viewValue: 'state1'},
+  //   {value: 'state2', viewValue: 'state2'},
+  //   {value: 'state3', viewValue: 'state3'},
+  //   {value: 'state4', viewValue: 'state4'},
+  // ];
 
-  city: choice[] = [
-    {value: 'city1', viewValue: 'city1'},
-    {value: 'city2', viewValue: 'city2'},
-    {value: 'city3', viewValue: 'city3'},
-    {value: 'city4', viewValue: 'city4'},
-  ];
+  // city: choice[] = [
+  //   {value: 'city1', viewValue: 'city1'},
+  //   {value: 'city2', viewValue: 'city2'},
+  //   {value: 'city3', viewValue: 'city3'},
+  //   {value: 'city4', viewValue: 'city4'},
+  // ];
 
   Health: choice[] = [
     {value: 'Health1', viewValue: 'Health1'},
@@ -61,9 +70,10 @@ export class RegisterComponent implements OnInit {
   ]
   select: string | any;
 
-  constructor() { }
+  constructor(private _url: PostService, private _router :Router) { }
 
   ngOnInit(): void {
+    console.log(this.states);
     this.initForm1();
     this.initForm2();
   }
@@ -98,6 +108,12 @@ private initForm2(){
 
 radioButtonChange(data: MatRadioChange) {
   console.log(data.value);
+  if(data.value=="SelfPay"){
+      this.hasHealth = false;
+  }else{
+    this.hasHealth = true;
+  }
+  console.log(this.hasHealth);
     this.radioSelected = data.value;
 }
 
@@ -111,9 +127,20 @@ cityChange(data: MatOptionSelectionChange){
   this.citySelected = data;
 }
 
+
+citiesBasedOnState: [] | any = [];
 stateChange(data: MatOptionSelectionChange){
   console.log(data);
   this.stateSelected = data;
+  this.selectedJson = this.cities as string [];
+  let i : number = 0;
+  this.cities.forEach((element: any) => {
+    if(element.admin_name == data){
+      this.citiesBasedOnState[i] = element.city;
+      i = i + 1;
+    }
+  });
+  this.citiesBasedOnState.sort();
 }
 
 healthChange(data: MatOptionSelectionChange){
@@ -123,10 +150,31 @@ healthChange(data: MatOptionSelectionChange){
 
 onSubmit1(){
   console.log(this.form1.value);
-}
+  const signUpUserData = {
+    "nationalCode": this.form1.value.nationalCode,
+    "password": this.form1.value.password,
+    "firstName":this.form1.value.firstName,
+    "lastName":this.form1.value.lastName,
+    "email": this.form1.value.email,
+    "state": this.stateSelected,
+    "city": this.citySelected,
+    "contactNumber": this.form1.value.contactNumber,
+    "gender": this.genderSelected,
+    "birthDate": this.form1.value.birthDate,
+    "hasHealthInsurance":this.hasHealth,
+    "zipCode":this.form1.value.zipCode,
+    "healthInsuranceCompany":this.healthSelected,
+  };
+//   this._url.signUpUser(signUpUserData).subscribe(
+//     res=>{console.log(res);
+//       localStorage.setItem('token', res.token);
+//       //this._router.navigate(['/dashboard']);
+//     },
+//         )
+//   console.log("signUpUserData",signUpUserData);
+ }
 
 onSubmit2(){
   console.log(this.form2.value);
 }
-
 }

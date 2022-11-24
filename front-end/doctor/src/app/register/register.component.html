@@ -1,5 +1,5 @@
 <mat-grid-list cols="2" rowHeight="660px" >
-  <mat-grid-tile [colspan]="1">
+  <mat-grid-tile [colspan]="1" style="margin-top: 3rem;">
     <div *ngIf="selected.value==0">
     <img style="width: 600px;height: 600px;" src="../../assets/gifs/login.gif">
   </div>
@@ -7,7 +7,7 @@
     <img style="width: 600px;height: 600px;" src="../../assets/gifs/Signup.gif">
   </div>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="1">
+  <mat-grid-tile [colspan]="1" style="margin-top: 3rem;">
     <mat-tab-group dynamicHeight mat-align-tabs="center" animationDuration="1000ms" [selectedIndex]="selected.value"
     (selectedIndexChange)="selected.setValue($event)">
       <mat-tab  *ngFor="let tab of tabs; let index = index" [label]="tab">
@@ -65,8 +65,8 @@
                   <mat-form-field style="width: 150px;">
                     <mat-label>State/Province</mat-label>
                     <mat-select name="state" [required]="true" (selectionChange)="stateChange($event.value)">
-                      <mat-option *ngFor="let st of state" [value]="st.value">
-                        {{st.viewValue}}
+                      <mat-option *ngFor="let st of states" [value]="st.state">
+                        {{st.state}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -74,8 +74,10 @@
                   <mat-form-field style="margin-left: 2rem;width: 100px;">
                     <mat-label>City</mat-label>
                     <mat-select name="city" [required]="true" (selectionChange)="cityChange($event.value)">
-                      <mat-option *ngFor="let ct of city" [value]="ct.value">
-                        {{ct.viewValue}}
+                      <mat-option *ngFor="let ct of citiesBasedOnState" [value]="ct">
+                        <p>
+                        {{ct}}
+                      </p>
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -86,14 +88,14 @@
                   </mat-form-field>
 
                   <mat-radio-group>
-                    <mat-radio-button style="margin-top: 1.5rem;" value="1" (change)="radioButtonChange($event)">Self Pay</mat-radio-button>
-                    <mat-radio-button style="margin-left: 2rem;" value="2" (change)="radioButtonChange($event)">Health Insurance</mat-radio-button>
+                    <mat-radio-button style="margin-top: 1.5rem;" value="SelfPay" (change)="radioButtonChange($event)">Self Pay</mat-radio-button>
+                    <mat-radio-button style="margin-left: 2rem;" value="HealthInsurance" (change)="radioButtonChange($event)">Health Insurance</mat-radio-button>
                   </mat-radio-group>
                   <div>
                     {{select}}
                   </div>
 
-                    <mat-form-field *ngIf="radioSelected==2" style="width: 250px;padding-right: 2rem;">
+                    <mat-form-field *ngIf="radioSelected=='HealthInsurance'" style="width: 250px;padding-right: 2rem;">
                       <mat-label>Health Insurance Company</mat-label>
                       <mat-select name="Health" [required]="true" (selectionChange)="healthChange($event.value)">
                         <mat-option *ngFor="let h of Health" [value]="h.value">
@@ -104,7 +106,7 @@
 
                   <mat-form-field style="margin-top: 1rem;width: 184px;">
                     <mat-label>Insurance ID</mat-label>
-                    <input type="number" matInput placeholder="123456789" [required]="true" formControlName="insuranceId">
+                    <input type="tel" [maxlength]="10" matInput placeholder="123456789" [required]="true" formControlName="insuranceId">
                   </mat-form-field>
 
                   <div style="text-align: center;padding-top: 0.5rem;">
@@ -143,3 +145,11 @@
     </mat-tab-group>
   </mat-grid-tile>
 </mat-grid-list>
+
+<!-- <div>
+  <ul>
+    <li *ngFor="let record of records">
+        <h2>{{record.city}}</h2>
+    </li>
+  </ul>
+</div> -->
