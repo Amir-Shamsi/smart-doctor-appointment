@@ -5,7 +5,11 @@ from . import views
 router = routers.DefaultRouter()
 router.register("add-province", viewset=views.AddProvinceByAdminViewSet)
 
-urlpatterns = router.urls
+city_router = routers.NestedDefaultRouter(router, "add-province", lookup="province")
+city_router.register("add-city", viewset=views.AddCityForProvinceByAdminViewSet, basename="city")
+
+
+urlpatterns = router.urls + city_router.urls
 
 urlpatterns += [
     path('forgot-password', views.PasswordHandler.forgot_password),

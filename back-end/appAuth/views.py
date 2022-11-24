@@ -72,3 +72,19 @@ class AddProvinceByAdminViewSet(ModelViewSet):
     serializer_class = ProvinceSeriailizer
     queryset = ProvinceState.objects.all()
 
+
+class AddCityForProvinceByAdminViewSet(ModelViewSet):
+    permission_classes = [IsAdminUser]
+    serializer_class = CitySerializer
+
+    def get_queryset(self):
+        queryset = City.objects.filter(province__id=self.kwargs["province_pk"]).all()
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        province_pk = self.kwargs["province_pk"]
+        province = ProvinceState.objects.filter(pk=province_pk).first()
+        serializer.save(province=province)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
