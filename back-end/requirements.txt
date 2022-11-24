@@ -1,0 +1,8 @@
+djoser
+django
+decouple
+user-agents
+ua-parser
+pyyaml
+django-user-agents
+djangorestframework
