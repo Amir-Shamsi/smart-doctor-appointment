@@ -45,7 +45,7 @@ class PasswordHandler:
             msg = EmailMultiAlternatives(subject, plain_message, from_email, [user.email])
             msg.attach_alternative(html_content, 'text/html')
             msg.send()
-        except: return Response({'Something went wrong! we\'re unable to sent email, Try later again.'})
+        except: return Response({'Something went wrong! we\'re unable to send email, Try again later.'})
         return Response({'Check your index and spam! Password Rest URL sent to your email.'})
 
     @staticmethod
