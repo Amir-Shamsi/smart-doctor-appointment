@@ -4,5 +4,6 @@ decouple
 user-agents
 ua-parser
 pyyaml
+pytz
 django-user-agents
 djangorestframework
