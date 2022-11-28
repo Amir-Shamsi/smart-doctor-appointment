@@ -22,15 +22,19 @@ class ResetPasswordSerializer(serializers.Serializer):
         return serializers.ValidationError('Passwords doesn\'t match.') if data['password'] != data['confirm_password'] else data
 
 
-
-
-class ProvinceSeriailizer(serializers.ModelSerializer):
-    class Meta:
-        model = ProvinceState
-        fields = ["name"]
-
-
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
-        fields = ["city"]
+        fields = ["city", "province"]
+
+
+class ProvinceSeriailizer(serializers.ModelSerializer):
+    city_set = CitySerializer(many=True)
+
+    class Meta:
+        model = ProvinceState
+        fields = ["id" ,"name", "city_set"]
+
+
+class FindCityByProvinceSerializer(serializers.Serializer):
+    province_id = serializers.IntegerField()

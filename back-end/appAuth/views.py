@@ -67,24 +67,34 @@ class PasswordHandler:
         return Response({'Password changed successfully.'})
 
 
-class AddProvinceByAdminViewSet(ModelViewSet):
-    permission_classes = [IsAdminUser]
+class ProvinceViewSet(ModelViewSet):
+    http_method_names = ["get"]
     serializer_class = ProvinceSeriailizer
     queryset = ProvinceState.objects.all()
 
 
-class AddCityForProvinceByAdminViewSet(ModelViewSet):
-    permission_classes = [IsAdminUser]
-    serializer_class = CitySerializer
+class CityViewSet(ModelViewSet):
 
-    def get_queryset(self):
-        queryset = City.objects.filter(province__id=self.kwargs["province_pk"]).all()
-        return queryset
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return FindCityByProvinceSerializer
+        return  CitySerializer
+    queryset = City.objects.select_related("province").all()
+    # def get_queryset(self):
+    #     queryset = City.objects.filter(province__id=self.kwargs["province_pk"]).all()
+    #     return queryset
 
     def create(self, request, *args, **kwargs):
+        # serializer = self.get_serializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+        # province_pk = self.kwargs["province_pk"]
+        # province = ProvinceState.objects.filter(pk=province_pk).first()
+        # serializer.save(province=province)
+        # return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        province_pk = self.kwargs["province_pk"]
+        province_pk = serializer.validated_data["province_id"]
         province = ProvinceState.objects.filter(pk=province_pk).first()
-        serializer.save(province=province)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        p_serializer = ProvinceSeriailizer(province)
+        return Response(p_serializer.data)

@@ -3,13 +3,14 @@ from rest_framework_nested import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register("add-province", viewset=views.AddProvinceByAdminViewSet)
+router.register("provinces", viewset=views.ProvinceViewSet)
+router.register("cities", viewset=views.CityViewSet, basename="city")
+# city_router = routers.NestedDefaultRouter(router, "provinces", lookup="province")
+# city_router.register("city", viewset=views.CityViewSet, basename="city")
 
-city_router = routers.NestedDefaultRouter(router, "add-province", lookup="province")
-city_router.register("add-city", viewset=views.AddCityForProvinceByAdminViewSet, basename="city")
 
+urlpatterns = router.urls
 
-urlpatterns = router.urls + city_router.urls
 
 urlpatterns += [
     path('forgot-password', views.PasswordHandler.forgot_password),
