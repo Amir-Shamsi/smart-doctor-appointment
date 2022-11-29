@@ -1,0 +1,28 @@
+<p>We will send a RESET PASSWORD link to your email</p>
+<form>
+  <mat-form-field style="width: 330px;">
+      <mat-label>Personal ID</mat-label>
+      <input matInput [formControl]="personal_id" [errorStateMatcher]="matcher" required>
+      <mat-error *ngIf="personal_id.hasError('required')">
+          Personal ID is <strong>required</strong>
+        </mat-error>
+    </mat-form-field><br />
+    <mat-form-field style="width: 330px;">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="email" [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com" required>
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="email.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field><br />
+    <br /><br />
+
+    <div mat-dialog-actions>
+      <button type="submit" mat-raised-button style="background-color: #0ab1ab;" (click)="onSendEmail()">Send Email</button>
+      <button mat-button class="mat-focus-indicator mat-raised-button mat-button-base mat-raised" (click)="onNoClick()">Cancel</button>
+    </div>
+  </form>

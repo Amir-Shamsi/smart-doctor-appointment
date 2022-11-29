@@ -2,15 +2,16 @@ import {HttpClient,HttpErrorResponse} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 import { throwError } from "rxjs";
 import { Router } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 
 
 export class PostService {
-  private _loginUrl ='http://localhost:8000/auth/users/';
-  private _signUpUrl ='http://localhost:8000/auth/jwt/create';
+  private _loginUrl = `${environment.API_URL}auth/jwt/create`; //'http://localhost:8000/auth/jwt/create';
+  private _signUpUrl = `${environment.API_URL}auth/users/`; //'http://localhost:8000/auth/users/';
+
     constructor(private httpClient: HttpClient,private router:Router){}
 
     loginUser(user: any){
@@ -29,6 +30,6 @@ export class PostService {
     }
     logout(){
       localStorage.removeItem('token')
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/'])
     }
   }

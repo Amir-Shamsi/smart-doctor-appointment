@@ -18,12 +18,17 @@ body { margin: 0; font-family: juana, "Helvetica Neue", sans-serif; }
   src: url("./assets/fonts/juana-semi-bold.ttf");
 }
 
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf");
+}
+
 .mat-body,
 .mat-body-1,
 .mat-typography .mat-body,
 .mat-typography .mat-body-1,
 .mat-typography {
-  font-family: juana !important;
+  font-family: OpenSans !important;
 }
 h1,
 h2,
@@ -38,5 +43,5 @@ p,
 input,
 button,
 a {
-  font-family: juana !important;
+  font-family: OpenSans !important;
 }

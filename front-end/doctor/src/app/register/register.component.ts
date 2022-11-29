@@ -1,12 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
-import { MatOptionSelectionChange } from '@angular/material/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder, NgForm, FormGroupDirective } from '@angular/forms';
+import { ErrorStateMatcher, MatOptionSelectionChange } from '@angular/material/core';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatRadioChange } from '@angular/material/radio';
 import { Router } from '@angular/router';
+import { AnyTxtRecord } from 'dns';
 import { PostService } from 'src/services/post.service';
-import City from '../../assets/city.json';
-import State from '../../assets/State.json';
+import { GetService } from 'src/services/get.service';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Inject} from '@angular/core';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+
 interface choice {
   value: string;
   viewValue: string;
@@ -22,8 +31,8 @@ interface choice {
 }]
 })
 export class RegisterComponent implements OnInit {
-  cities: any = City;
-  states:any = State;
+  personal_id: string | any;
+  email: string | any;
 
   tabs = ['SignUp', 'Login'];
   selected = new FormControl(0);
@@ -35,11 +44,13 @@ export class RegisterComponent implements OnInit {
   selectedValue: string | any;
 
   radioSelected : any;
-  stateSelected : any;
-  selectedJson : [] | any;
+  stateSelectedId : any;
   citySelected : any;
   healthSelected : any;
   genderSelected : any;
+
+  states: [] | any;
+  cities: [] | any;
 
   hide = true;
 
@@ -48,32 +59,36 @@ export class RegisterComponent implements OnInit {
     {value: 'Male', viewValue: 'Male'},
   ];
 
-  // state: choice[] = [
-  //   {value: 'state1', viewValue: 'state1'},
-  //   {value: 'state2', viewValue: 'state2'},
-  //   {value: 'state3', viewValue: 'state3'},
-  //   {value: 'state4', viewValue: 'state4'},
-  // ];
-
-  // city: choice[] = [
-  //   {value: 'city1', viewValue: 'city1'},
-  //   {value: 'city2', viewValue: 'city2'},
-  //   {value: 'city3', viewValue: 'city3'},
-  //   {value: 'city4', viewValue: 'city4'},
-  // ];
-
   Health: choice[] = [
-    {value: 'Health1', viewValue: 'Health1'},
-    {value: 'Health2', viewValue: 'Health2'},
-    {value: 'Health3', viewValue: 'Health3'},
-    {value: 'Health4', viewValue: 'Health4'},
+    {value: 'Arman Insurance', viewValue: 'Arman Insurance'},
+    {value: 'Asia Insurance', viewValue: 'Asia Insurance'},
+    {value: 'Alborz Insurance', viewValue: 'Alborz Insurance'},
+    {value: 'Omid Insurance', viewValue: 'Omid Insurance'},
+    {value: 'Iran Insurance', viewValue: 'Iran Insurance'},
+    {value: 'Parsian Insurance', viewValue: 'Parsian Insurance'},
+    {value: 'Pasargad Insurance', viewValue: 'Pasargad Insurance'},
+    {value: 'Hafez Insurance', viewValue: 'Hafez Insurance'},
+    {value: 'Dana Insurance', viewValue: 'Dana Insurance'},
+    {value: 'Razi Insurance', viewValue: 'Razi Insurance'},
+    {value: 'Saman Insurance', viewValue: 'Saman Insurance'},
+    {value: 'Sina Insurance', viewValue: 'Sina Insurance'},
+    {value: 'Ma Insurance', viewValue: 'Ma Insurance'},
+    {value: 'Moalem Insurance', viewValue: 'Moalem Insurance'},
+    {value: 'Melat Insurance', viewValue: 'Melat Insurance'},
+
   ]
   select: string | any;
 
-  constructor(private _url: PostService, private _router :Router) { }
+  constructor(private _snackBar: MatSnackBar,private post: PostService, private get: GetService, private _router :Router,public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(this.states);
+    this.get.getStates().subscribe({
+      next: res => {
+        console.log("States", res);
+        this.states = res;
+      }
+        })
+
     this.initForm1();
     this.initForm2();
   }
@@ -128,19 +143,19 @@ cityChange(data: MatOptionSelectionChange){
 }
 
 
-citiesBasedOnState: [] | any = [];
 stateChange(data: MatOptionSelectionChange){
   console.log(data);
-  this.stateSelected = data;
-  this.selectedJson = this.cities as string [];
-  let i : number = 0;
-  this.cities.forEach((element: any) => {
-    if(element.admin_name == data){
-      this.citiesBasedOnState[i] = element.city;
-      i = i + 1;
+  this.stateSelectedId = data;
+  const j = {
+      "province_id": this.stateSelectedId
     }
-  });
-  this.citiesBasedOnState.sort();
+    this.get.getCities(j).subscribe({
+      next: res => {
+        console.log("cities", res);
+        this.cities = res.city_set;
+        console.log(this.cities);
+      }
+         })
 }
 
 healthChange(data: MatOptionSelectionChange){
@@ -149,14 +164,13 @@ healthChange(data: MatOptionSelectionChange){
 }
 
 onSubmit1(){
-  console.log(this.form1.value);
+
   const signUpUserData = {
     "nationalCode": this.form1.value.nationalCode,
     "password": this.form1.value.password,
     "firstName":this.form1.value.firstName,
     "lastName":this.form1.value.lastName,
     "email": this.form1.value.email,
-    "state": this.stateSelected,
     "city": this.citySelected,
     "contactNumber": this.form1.value.contactNumber,
     "gender": this.genderSelected,
@@ -165,16 +179,66 @@ onSubmit1(){
     "zipCode":this.form1.value.zipCode,
     "healthInsuranceCompany":this.healthSelected,
   };
-//   this._url.signUpUser(signUpUserData).subscribe(
-//     res=>{console.log(res);
-//       localStorage.setItem('token', res.token);
-//       //this._router.navigate(['/dashboard']);
-//     },
-//         )
-//   console.log("signUpUserData",signUpUserData);
+  console.log(signUpUserData);
+  // this._url.signUpUser(signUpUserData).subscribe(
+  //   res=>{console.log(res);
+  //     //localStorage.setItem('token', res.token);
+  //     this._router.navigate(['/dashboard']);
+  //   },
+  //       )
+  console.log("signUpUserData",signUpUserData);
  }
 
 onSubmit2(){
   console.log(this.form2.value);
 }
+
+openDialog() {
+  const dialogRef = this.dialog.open(DialogOverviewExampleDialog,
+    {
+      width: '380px',
+    });
 }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    //condition true
+    const isSubmitted = form && form.submitted;
+    //false
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+//Dialog Component
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+  [x: string]: any;
+  durationInSeconds = 5;
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>) {}
+  //Dialog close function
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+   /*Form validations*/
+   personal_id = new FormControl('', [
+    Validators.required,
+    ]);
+    email = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+
+    onSendEmail(){
+      //call send email api
+      console.log("Api Called");
+      console.log(this.personal_id.value,this.email.value);
+      this.dialogRef.close();
+    }
+
+    matcher = new MyErrorStateMatcher();
+}
+
+

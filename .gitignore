@@ -2,6 +2,6 @@
 *.lock
 back-end/Pipfile
 back-end/requirements.txt
-back-end/requirements.txt
-back-end/requirements.txt
-back-end/requirements.txt
+.env
+back-end/SDABackend/urls.py
+

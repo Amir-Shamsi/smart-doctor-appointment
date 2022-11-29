@@ -21,10 +21,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent , DialogOverviewExampleDialog} from './register/register.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HttpClient } from '@angular/common/http';
     HomepageComponent,
     SignupComponent,
     RegisterComponent,
+    DialogOverviewExampleDialog,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,8 @@ import { HttpClient } from '@angular/common/http';
     MatFormFieldModule,
     MatRadioModule,
     HttpClientModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]
