@@ -65,8 +65,8 @@
                   <mat-form-field style="width: 150px;">
                     <mat-label>State/Province</mat-label>
                     <mat-select name="state" [required]="true" (selectionChange)="stateChange($event.value)">
-                      <mat-option *ngFor="let st of states" [value]="st.state">
-                        {{st.state}}
+                      <mat-option *ngFor="let st of states" [value]="st.id">
+                        {{st.name}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -74,9 +74,9 @@
                   <mat-form-field style="margin-left: 2rem;width: 100px;">
                     <mat-label>City</mat-label>
                     <mat-select name="city" [required]="true" (selectionChange)="cityChange($event.value)">
-                      <mat-option *ngFor="let ct of citiesBasedOnState" [value]="ct">
+                      <mat-option *ngFor="let ct of cities" [value]="ct.city">
                         <p>
-                        {{ct}}
+                        {{ct.city}}
                       </p>
                       </mat-option>
                     </mat-select>
@@ -134,7 +134,10 @@
               </button>
             </mat-form-field>
 
-            <div style="text-align: center;padding-top: 2rem;">
+            <div style="text-align: left;padding-top: 1rem;">
+              <span (click)="openDialog()" style="cursor: pointer;font-weight: bold;color: #045856;">Forgot Password?</span>
+            </div>
+            <div style="text-align: center;padding-top: 3rem;">
               <button style="width: 450px;height: 40px;font-size: 20px;border: none;background-color: #6ce062 ;border-radius: 100px;"  type="submit"  [disabled]="form2.invalid" (click)="onSubmit2()">LogIn</button>
             </div>
           </form>
@@ -145,11 +148,3 @@
     </mat-tab-group>
   </mat-grid-tile>
 </mat-grid-list>
-
-<!-- <div>
-  <ul>
-    <li *ngFor="let record of records">
-        <h2>{{record.city}}</h2>
-    </li>
-  </ul>
-</div> -->

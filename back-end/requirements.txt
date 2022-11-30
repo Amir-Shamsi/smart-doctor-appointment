@@ -1,9 +1,10 @@
 djoser
 django
-decouple
 user-agents
 ua-parser
+python-decouple
 pyyaml
 pytz
 django-user-agents
 djangorestframework
+
