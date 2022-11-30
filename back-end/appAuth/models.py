@@ -2,25 +2,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser
 from django.conf import settings
 import uuid
-
-class ProvinceState(models.Model):
-    name = models.CharField(max_length=64)
-
-    def __str__(self):
-        return self.name
-
-class City(models.Model):
-    city = models.CharField(max_length=64)
-    province = models.ForeignKey(ProvinceState, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.city
-
-class InsuranceCompany(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
+from appApi.models import City, ProvinceState, InsuranceCompany
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, personal_ID, password, email,  **extra_fields):

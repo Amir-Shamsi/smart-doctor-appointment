@@ -2,13 +2,11 @@ from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
 from rest_framework import serializers
 from .models import *
 
-
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
         fields = ['id', 'personal_ID', 'password', 'first_name', 'last_name',
                   'email', 'city', 'contact_number', 'gender', 'birth_date',
                   'has_health_insurance', 'zip_code', 'health_insurance_company']
-
 
 class ForgotPasswordSerializer(serializers.Serializer):
     personal_ID = serializers.CharField(max_length=10, min_length=10)
@@ -20,21 +18,3 @@ class ResetPasswordSerializer(serializers.Serializer):
 
     def validate(self, data):
         return serializers.ValidationError('Passwords doesn\'t match.') if data['password'] != data['confirm_password'] else data
-
-
-class CitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = City
-        fields = ["city", "province"]
-
-
-class ProvinceSeriailizer(serializers.ModelSerializer):
-    city_set = CitySerializer(many=True)
-
-    class Meta:
-        model = ProvinceState
-        fields = ["id" ,"name", "city_set"]
-
-
-class FindCityByProvinceSerializer(serializers.Serializer):
-    province_id = serializers.IntegerField()
