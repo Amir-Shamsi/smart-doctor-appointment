@@ -7,4 +7,5 @@ pyyaml
 pytz
 django-user-agents
 djangorestframework
+django-cors-headers
 
