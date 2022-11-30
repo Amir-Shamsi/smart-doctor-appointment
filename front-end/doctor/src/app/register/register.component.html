@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="660px" >
+<mat-grid-list cols="2" rowHeight="660px">
   <mat-grid-tile [colspan]="1" style="margin-top: 3rem;">
     <div *ngIf="selected.value==0">
     <img style="width: 600px;height: 600px;" src="../../assets/gifs/login.gif">
@@ -22,7 +22,7 @@
 
                 <mat-form-field style="padding-left: 2rem;">
                   <mat-label>Password</mat-label>
-                  <input minlength="4" matInput [type]="hide ? 'password' : 'text'" [required]="true" formControlName="password">
+                  <input minlength="8" matInput [type]="hide ? 'password' : 'text'" [required]="true" formControlName="password">
                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
@@ -36,11 +36,16 @@
                   <input matInput placeholder="Last Name" maxlength="100" [required]="true" formControlName="lastName">
                   </mat-form-field>
 
-                  <mat-form-field style="width: 100px;">
+                  <!-- <mat-form-field style="width: 100px;">
                     <mat-label>Birth Date</mat-label>
                     <input matInput [matDatepicker]="picker" [required]="true" formControlName="birthDate">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field> -->
+
+                  <mat-form-field style="width: 100px;">
+                    <mat-label>Birth Date</mat-label>
+                    <input type="text" matInput placeholder="2000-01-01" [required]="true" formControlName="birthDate">
                   </mat-form-field>
 
                   <mat-form-field style="margin-left: 2rem;width: 100px;">
@@ -74,7 +79,7 @@
                   <mat-form-field style="margin-left: 2rem;width: 100px;">
                     <mat-label>City</mat-label>
                     <mat-select name="city" [required]="true" (selectionChange)="cityChange($event.value)">
-                      <mat-option *ngFor="let ct of cities" [value]="ct.city">
+                      <mat-option *ngFor="let ct of cities" [value]="ct.id">
                         <p>
                         {{ct.city}}
                       </p>
@@ -98,8 +103,8 @@
                     <mat-form-field *ngIf="radioSelected=='HealthInsurance'" style="width: 250px;padding-right: 2rem;">
                       <mat-label>Health Insurance Company</mat-label>
                       <mat-select name="Health" [required]="true" (selectionChange)="healthChange($event.value)">
-                        <mat-option *ngFor="let h of Health" [value]="h.value">
-                          {{h.viewValue}}
+                        <mat-option *ngFor="let h of health" [value]="h.id">
+                          {{h.name}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -135,7 +140,7 @@
             </mat-form-field>
 
             <div style="text-align: left;padding-top: 1rem;">
-              <span (click)="openDialog()" style="cursor: pointer;font-weight: bold;color: #045856;">Forgot Password?</span>
+              <span style="cursor: pointer;font-weight: bold;color: #045856;" routerLink="/forgotPassword">Forgot Password?</span>
             </div>
             <div style="text-align: center;padding-top: 3rem;">
               <button style="width: 450px;height: 40px;font-size: 20px;border: none;background-color: #6ce062 ;border-radius: 100px;"  type="submit"  [disabled]="form2.invalid" (click)="onSubmit2()">LogIn</button>
