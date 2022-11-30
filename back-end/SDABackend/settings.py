@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django_user_agents',
     'debug_toolbar',
 
-    'appAuth'
+    'appAuth',
+    'appApi'
 ]
 
 INTERNAL_IPS = [
