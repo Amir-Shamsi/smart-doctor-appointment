@@ -172,6 +172,7 @@ onSubmit1(){
     },
         )
   console.log("signUpUserData",signUpUserData);
+  alert("You are Signed Up successfully.")
  }
 
 onSubmit2(){
@@ -181,6 +182,7 @@ onSubmit2(){
   }
   console.log(signInUserData);
   this.post.loginUser(signInUserData).subscribe(res => {console.log(res);})
+  alert("You are Signed In successfully.")
 }
 
 }
