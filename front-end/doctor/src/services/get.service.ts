@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 
 
 export class GetService {
-  private _stateUrl = `${environment.API_URL}auth/provinces/`; //'http://localhost:8000/auth/jwt/create';
-  private _cityUrl = `${environment.API_URL}auth/cities/`; //'http://localhost:8000/auth/users/';
+  private _stateUrl = `${environment.API_URL}api/provinces/`;
+  private _healthUrl = `${environment.API_URL}api/insurance-companies`;
 
     constructor(private httpClient: HttpClient){}
 
@@ -18,7 +18,7 @@ export class GetService {
 
     }
 
-    getCities(stateId :any){
-      return this.httpClient.post<any>(this._cityUrl, stateId)
+    getHealthInsuranceCompany(){
+      return this.httpClient.get<any>(this._healthUrl)
     }
   }

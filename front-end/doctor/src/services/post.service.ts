@@ -9,10 +9,21 @@ import { environment } from 'src/environments/environment';
 
 
 export class PostService {
-  private _loginUrl = `${environment.API_URL}auth/jwt/create`; //'http://localhost:8000/auth/jwt/create';
-  private _signUpUrl = `${environment.API_URL}auth/users/`; //'http://localhost:8000/auth/users/';
+  private _loginUrl = `${environment.API_URL}auth/jwt/create`;
+  private _signUpUrl = `${environment.API_URL}auth/users/`;
+  private _cityUrl = `${environment.API_URL}api/cities/`;
+  private _forgotPassword = `${environment.API_URL}auth/forgot-password`;
 
     constructor(private httpClient: HttpClient,private router:Router){}
+
+    forgotPassword(data: any){
+      return this.httpClient.post<any>(this._forgotPassword, data)
+    }
+
+    getCities(stateId :any){
+      return this.httpClient.post<any>(this._cityUrl, stateId)
+    }
+
 
     loginUser(user: any){
       return this.httpClient.post<any>(this._loginUrl, user)
