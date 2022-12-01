@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PostService } from 'src/services/post.service';
-
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -37,8 +36,12 @@ export class ForgotPasswordComponent implements OnInit {
       "email" : this.form.value.email,
     }
     console.log(forgotPassword);
-    this.post.forgotPassword(forgotPassword).subscribe(res => {console.log(res);})
-    //this.router.navigate(['register'])
+    this.post.forgotPassword(forgotPassword).subscribe(res => {console.log(res)})
+    this.alert();
   }
 
+  alert(){
+    alert("Check your index and spam! Password Reset URL sent to your email.");
+    this.router.navigate(['register'])
+  }
 }

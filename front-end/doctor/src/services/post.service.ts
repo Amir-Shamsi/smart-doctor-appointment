@@ -1,6 +1,6 @@
 import {HttpClient,HttpErrorResponse} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import { throwError } from "rxjs";
+import { catchError, Observable, throwError } from "rxjs";
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -16,7 +16,7 @@ export class PostService {
 
     constructor(private httpClient: HttpClient,private router:Router){}
 
-    forgotPassword(data: any){
+    forgotPassword(data: any): Observable<any> {
       return this.httpClient.post<any>(this._forgotPassword, data)
     }
 
@@ -43,4 +43,15 @@ export class PostService {
       localStorage.removeItem('token')
       this.router.navigate(['/'])
     }
-  }
+
+//     catchAuthError(error: any): Observable<Response>{
+//       if(error && error.error && error.error.message){
+//         alert(error.error.message)
+//       }else if(error && error.message){
+//         alert(error.message);
+//       }else{
+//         alert(JSON.stringify(error));
+//       }
+//       return throwError(error);
+//   }
+ }
