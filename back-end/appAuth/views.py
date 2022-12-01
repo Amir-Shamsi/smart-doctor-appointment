@@ -7,6 +7,7 @@ from django.core.mail import EmailMultiAlternatives
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
+from .queries import *
 from .serializers import *
 
 class PasswordHandler:
@@ -17,8 +18,9 @@ class PasswordHandler:
             return Response({'User already logged in.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
         serializer = ForgotPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = CustomUser.objects.get(personal_ID=serializer.validated_data['personal_ID'],
-                                      email=serializer.validated_data['email'])
+        try:user = CustomUser.objects.get(personal_ID=serializer.validated_data['personal_ID'],
+                                          email=serializer.validated_data['email'])
+        except: user = None
         if not user: return Response({'User not found.'}, status=status.HTTP_404_NOT_FOUND)
         try: UserHashTable.objects.get(user=user, key='password-reset').delete()
         except: pass
@@ -47,19 +49,17 @@ class PasswordHandler:
         return Response({'Check your index and spam! Password Rest URL sent to your email.'})
 
     @staticmethod
-    @api_view(['POST'])
+    @api_view(['POST', 'GET'])
     def password_reset(request):
-        token = request.GET['token']
-        print(token)
-        try: uht = UserHashTable.objects.get(key='password-reset', value=token)
-        except: uht = None
-        if not token or not uht: return Response({'Token is not valid.'})
-        if not uht.expire_date.replace(tzinfo=pytz.UTC) >= datetime.datetime.now().replace(tzinfo=pytz.UTC):
-            return Response({'Token has been expired.'})
-        user = CustomUser.objects.get(personal_ID=uht.user.personal_ID)
+        token = TokenValidation(request.GET['token'])
+        token_status = token.validate()
+        if request.method == 'GET':
+            return Response({'Token is ok.'}) if token_status is True else token_status
+        if token_status is not True: return token_status
+        user = CustomUser.objects.get(personal_ID=token.get_user().personal_ID)
         serializer = ResetPasswordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user.set_password(serializer.validated_data['password'])
         user.save()
-        uht.delete()
+        token.delete()
         return Response({'Password changed successfully.'})
