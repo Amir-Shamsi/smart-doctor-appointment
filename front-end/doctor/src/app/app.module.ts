@@ -1,5 +1,4 @@
 import { HomepageComponent } from './homepage/homepage.component';
-import { SignupComponent } from './signup/signup.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,14 +26,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    SignupComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
