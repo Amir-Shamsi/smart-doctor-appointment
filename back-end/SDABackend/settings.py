@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'appAuth',
-    'appApi'
+    'appApi',
+    'appDisease'
 ]
 
 INTERNAL_IPS = [
