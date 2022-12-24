@@ -8,4 +8,10 @@ pytz
 django-user-agents
 djangorestframework
 django-cors-headers
-
+pandas
+numpy
+seaborn
+sklearn
+joblib
+scikit-learn
+wikipedia
