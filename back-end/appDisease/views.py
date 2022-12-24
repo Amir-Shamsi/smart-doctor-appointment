@@ -20,4 +20,10 @@ class DiseaseController:
         serializer_class = QuestionIntroSerializer
         queryset = QuestionIntro.objects.all()
 
-# Create your views here.
+    @staticmethod
+    @api_view(['get'])
+    def get_symptoms(request):
+        if request.user.is_authenticated:
+            return Response(handler.PredictHandler.get_symptoms())
+        return Response({'You must login first!'})
+
