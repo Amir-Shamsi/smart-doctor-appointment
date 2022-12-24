@@ -34,6 +34,22 @@ class DiseasePrediction:
         assert (len(test_labels) == test_features.shape[0])
         return test_features, test_labels, df_test
 
+    def _train_val_split(self):
+        X_train, X_val, y_train, y_val = train_test_split(self.train_features, self.train_labels,
+                                                          test_size=self.config['dataset']['validation_size'],
+                                                          random_state=self.config['random_state'])
+        return X_train, y_train, X_val, y_val
+
+    def _select_model(self):
+        self.clf = MultinomialNB()
+        return self.clf
+
+    def train_model(self):
+        X_train, y_train, X_val, y_val = self._train_val_split()
+        classifier = self._select_model()
+        classifier = classifier.fit(X_train, y_train)
+        dump(classifier, str(str(settings.BASE_DIR) + self.model_save_path + f'__{self.model_name}' + ".joblib"))
+
     def __load__conf__(self):
         with open(f'{str(settings.BASE_DIR)}/appDisease/predictor/config.yaml', 'r') as f:
             self.config = yaml.safe_load(f)
