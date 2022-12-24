@@ -50,6 +50,14 @@ class DiseasePrediction:
         classifier = classifier.fit(X_train, y_train)
         dump(classifier, str(str(settings.BASE_DIR) + self.model_save_path + f'__{self.model_name}' + ".joblib"))
 
+    def make_prediction(self, test_data=None):
+        clf = load(str(str(settings.BASE_DIR) + self.model_save_path + f'__{self.model_name}' + ".joblib"))
+        if test_data is not None:
+            result = clf.predict(test_data)
+            return result
+        else: result = clf.predict(self.test_features)
+        return result
+
     def __load__conf__(self):
         with open(f'{str(settings.BASE_DIR)}/appDisease/predictor/config.yaml', 'r') as f:
             self.config = yaml.safe_load(f)
