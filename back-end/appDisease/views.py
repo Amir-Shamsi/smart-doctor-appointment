@@ -9,7 +9,6 @@ from rest_framework.permissions import *
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import *
-from .queries import QueryHandler
 from .predictor import model_core, handler
 from .serializers import *
 
@@ -38,3 +37,14 @@ class DiseaseController:
         detail = serializer.validated_data['detail']
         try: pred = handler.PredictHandler(symptoms)
         except ValueError: return Response({'symptoms are not right'})
+        return Response({'disease': pred.get_result(),
+                         'precaution': pred.get_precaution(pred.get_result()),
+                         'description': pred.get_description(pred.get_result())
+                         })
+
+
+        # TODO: Save patient detail
+
+
+
+
