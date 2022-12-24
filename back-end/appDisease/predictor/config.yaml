@@ -4,3 +4,5 @@ dataset:
   training_data_path: '/appDisease/predictor/dataset/training_data.csv'
   test_data_path: '/appDisease/predictor/dataset/test_data.csv'
   validation_size: 0.33
+model_save_path: '/appDisease/predictor/deci_model/'
+model_type: 'mnb'
