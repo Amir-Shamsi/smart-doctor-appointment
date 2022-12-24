@@ -71,3 +71,6 @@ class DiseasePrediction:
         self.train_features, self.train_labels, self.train_df = self._load_train_dataset()
         self.test_features, self.test_labels, self.test_df = self._load_test_dataset()
 
+    @staticmethod
+    def get_symptoms():
+        return [' '.join(itr.strip().split('_')) for itr in list(symptoms_label.symptoms.keys())]
