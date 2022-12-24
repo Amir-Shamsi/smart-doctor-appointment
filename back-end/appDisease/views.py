@@ -27,3 +27,14 @@ class DiseaseController:
             return Response(handler.PredictHandler.get_symptoms())
         return Response({'You must login first!'})
 
+    @staticmethod
+    @api_view(['post'])
+    def disease_data_analysis(request):
+        if request.user.is_anonymous:
+            return Response({'You must login first!'})
+        serializer = PatientDiseaseDataSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        symptoms = serializer.validated_data.get('symptoms', [])
+        detail = serializer.validated_data['detail']
+        try: pred = handler.PredictHandler(symptoms)
+        except ValueError: return Response({'symptoms are not right'})
