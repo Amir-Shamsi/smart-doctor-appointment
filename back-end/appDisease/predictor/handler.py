@@ -24,3 +24,12 @@ class PredictHandler(DiseasePrediction):
     def get_result(self):
         return str(self.result[0])
 
+    @staticmethod
+    def get_precaution(disease):
+        info = {}
+        with open(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/' + 'symptom_precaution.csv', mode='r') as infile:
+            reader = csv.reader(infile)
+            for row in reader:
+                info[row[0]] = row[1:]
+        return info[disease]
+
