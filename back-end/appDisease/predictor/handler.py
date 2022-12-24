@@ -20,3 +20,7 @@ class PredictHandler(DiseasePrediction):
         df_test = pd.DataFrame(columns=list(symp.keys()))
         df_test.loc[0] = np.array(list(symp.values()))
         self.result = self.make_prediction(test_data=df_test)
+
+    def get_result(self):
+        return str(self.result[0])
+
