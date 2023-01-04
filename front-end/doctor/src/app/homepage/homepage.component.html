@@ -1,123 +1,196 @@
-<div style="padding-left: 3rem;">
-  <mat-toolbar style="background: transparent;margin-top: 1.5rem; padding-right: 4rem;">
-    <div>
-    </div>
-    <img style="width: 40px;height: 40px;" src="../../assets/images/logo.png">
-    <span style="font-family: juana;font-weight: bold;font-size: 30px;color: #027e7a;padding-left: 0.5rem;">WeCare</span>
+<div style="padding-left: 8rem">
+  <mat-toolbar
+    style="background: transparent; margin-top: 1.5rem; padding-right: 4rem"
+  >
+    <div></div>
+    <img
+      src="../../assets/images/logo.png"
+      style="height: 50px; width: 50px"
+    />
+    <span
+      style="
+        font-family: GTWalsheimProBlack !important;
+        font-weight: bold;
+        font-size: 30px;
+        color: #000000;
+        padding-left: 0.5rem;
+      "
+      >We</span
+    >
+    <span
+      style="
+        font-family: GTWalsheimProBlack !important;
+        font-weight: bold;
+        font-size: 30px;
+        color: #027e7a;
+      "
+      >Care</span
+    >
     <span class="example-spacer"></span>
-    <button mat-icon-button class="header-text" style="margin-right: 3rem;">
-      <span>
-        Home
-      </span>
+    <button mat-raised-button class="header-text" style="margin-right: 1rem">
+      <span class="fontb"> Home </span>
     </button>
-    <button mat-icon-button class="header-text">
-      <span>
-        About Us
-      </span>
+    <button mat-raised-button class="header-text" style="margin-right: 1rem">
+      <span class="fontb"> About Us </span>
     </button>
-    <button style="font-size: 16px;border-color: #027e7a;border-width: medium;border-radius: 50px;">
-      <a style="text-decoration: none;" [routerLink]="['/register']">
-      <span style="color: rgb(0, 0, 0);">
-        Login / Signup
-    </span>
-  </a>
+    <button mat-raised-button class="header-text" style="margin-right: 1rem">
+      <span class="fontb"> Contact Us </span>
+    </button>
+    <button
+      style="margin-right: 5rem; box-shadow: none; background-color: #027e7a"
+      mat-raised-button
+    >
+      <a style="text-decoration: none" [routerLink]="['/register']">
+        <span style="color: white; font-size: 16px;" class="fontb"> Login / Signup </span>
+      </a>
     </button>
   </mat-toolbar>
 </div>
 
-<mat-grid-list style="margin-top: 5rem;" cols="5" rowHeight="3:5">
-  <mat-grid-tile [colspan]=3>
-    <div style="position: absolute;">
-    <h1 style="font-size: 40px;font-weight: bold;padding-bottom: 10rem;">WE CARE ABOUT YOUR HEALTH<br/><br/></h1>
+<mat-grid-list style="margin-top: 5rem" cols="5" rowHeight="3:5">
+  <mat-grid-tile [colspan]="3">
+    <div style="position: absolute; padding-bottom: 9rem">
+      <span class="fontB" style="font-size: 40px; padding-bottom: 10rem">
+        WE
+      </span>
+      <span
+        class="fontB"
+        style="font-size: 40px; padding-bottom: 10rem; color: #027e7a"
+      >
+        CARE
+      </span>
+      <span class="fontB" style="font-size: 40px; padding-bottom: 10rem">
+        ABOUT YOUR HEALTH <br /><br />
+      </span>
     </div>
-    <div style="position: absolute;">
-    <p style="font-size: 20px;">Easy online appointment with best specialists<br/><br/><br/><br/></p>
+    <div style="position: absolute">
+      <p style="font-size: 20px; font-weight: bold">
+        Easy online appointment with best specialists<br /><br /><br /><br />
+      </p>
     </div>
-    <div style="position: absolute;padding-top: 10rem;">
-    <button style="border-color: #027e7a;border-width: thick;font-size: 30px;color: black;width: 430px;height: 80px;border-radius: 50px;">
-      <a>BOOK NOW</a>
-    </button>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]=2>
-    <div style="justify-content: center" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-sine">
-   <img style="width: 500px;height: 500px;margin-right: 3rem;" src="../../assets/gifs/main.gif">
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
+    <div style="position: absolute; padding-top: 17rem">
+      <div class="buttons">
+        <button class="blob-btn" (click)="onBook()">
+          <span
+            style="font-size: 30px; font-family: GTWalsheimProBold !important"
+            >BOOK NOW</span
+          >
+          <span class="blob-btn__inner">
+            <span class="blob-btn__blobs">
+              <span class="blob-btn__blob"></span>
+              <span class="blob-btn__blob"></span>
+              <span class="blob-btn__blob"></span>
+              <span class="blob-btn__blob"></span>
+            </span>
+          </span>
+        </button>
+        <br />
 
-
-<mat-grid-list cols="5" rowHeight="3:5">
-  <mat-grid-tile [colspan]=2>
-    <div style="justify-content: center" data-aos="fade-right"
-  data-aos-duration="1000"
-  data-aos-easing="ease-in-sine">
-    <img style="width: 450px;height: 450px;margin-left: 3rem;" src="../../assets/gifs/symptoms.gif">
-  </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]=3>
-    <div>
-      <p style="font-size: 25px;">Enter symptoms and get relevant prognosis <br/><br/><br/>based on our smart AI methods</p>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur
+                in="SourceGraphic"
+                result="blur"
+                stdDeviation="10"
+              ></feGaussianBlur>
+              <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7"
+                result="goo"
+              ></feColorMatrix>
+              <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+            </filter>
+          </defs>
+        </svg>
+      </div>
     </div>
   </mat-grid-tile>
-</mat-grid-list>
-
-
-<mat-grid-list cols="5" rowHeight="3:5">
-  <mat-grid-tile [colspan]=3>
-    <div style="position: absolute;">
-      <p style="font-size: 25px;">We recommend best specialists <br/><br/><br/>to help and cure you</p>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]=2>
-    <div style="justify-content: center" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-sine">
-   <img style="width: 550px;height: 550px;margin-right: 3rem;" src="../../assets/gifs/Doctor.gif">
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
-
-
-<mat-grid-list cols="5" rowHeight="3:5">
-  <mat-grid-tile [colspan]=2>
-    <div style="justify-content: center" data-aos="fade-right"
-  data-aos-duration="1000"
-  data-aos-easing="ease-in-sine">
-    <img style="width: 450px;height: 450px;margin-left: 3rem;" src="../../assets/gifs/prescription.gif">
-  </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]=3>
-    <div style="position: absolute;">
-      <p style="font-size: 25px;">Get online prescription from specialists</p>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
-
-
-<mat-grid-list cols="5" rowHeight="3:5">
-  <mat-grid-tile [colspan]=3>
-    <div style="position: absolute;">
-        <p style="font-size: 25px;">Have an online chat with any specialist<br/><br/><br/> about your health</p>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]=2>
-    <div style="justify-content: center" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="ease-in-sine">
-   <img style="width: 550px;height: 550px;margin-right: 3rem;" src="../../assets/gifs/chat.gif">
+  <mat-grid-tile [colspan]="2">
+    <div
+      style="justify-content: center"
+      data-aos="fade-left"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-sine"
+    >
+      <img
+        style="width: 500px; height: 500px; margin-right: 3rem"
+        src="../../assets/gifs/Cardiologist.gif"
+      />
     </div>
   </mat-grid-tile>
 </mat-grid-list>
 
-
-  <mat-grid-list cols="5" rowHeight="3:5">
-    <mat-grid-tile [colspan]=2>
-      <div style="justify-content: center" data-aos="fade-right"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-sine">
-    <img style="width: 550px;height: 450px;padding-left: 3rem;" src="../../assets/gifs/wecare.gif">
+<mat-grid-list cols="5" style="margin-top: 2rem">
+  <mat-grid-tile
+    colspan="1"
+    rowspan="1"
+    style="margin-top: 17rem; margin-left: 17rem; margin-right: 17rem"
+  >
+    <div
+      style="justify-content: center"
+      data-aos="zoom-in"
+      data-aos-duration="500"
+      data-aos-easing="ease-in-sine"
+    >
+    <div style="display: inline;">
+      <img style="display: block;padding-left: 4.5rem;" src="../../assets/images/AI.png" />
+      <h1 style="margin-top: 2rem;font-weight: bold;">Smart AI Diagnose System</h1>
     </div>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]=3>
-      <div style="position: absolute;">
-        <p style="font-size: 35px;padding-top: 9rem;">WE DO CARE ABOUT YOUR HEALTH</p>
+      </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    colspan="1"
+    rowspan="1"
+    style="margin-top: 17rem; margin-left: 17rem; margin-right: 17rem"
+  >
+    <div
+      style="justify-content: center"
+      data-aos="zoom-in"
+      data-aos-duration="500"
+      data-aos-easing="ease-in-sine"
+    >
+      <div style="display: inline;">
+        <img style="display: block;padding-left: 4.5rem;" src="../../assets/images/appointment.png" />
+        <h1 style="margin-top: 2rem;font-weight: bold;">Online & Fast Appointment</h1>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    colspan="1"
+    rowspan="1"
+    style="margin-top: 17rem; margin-left: 17rem; margin-right: 17rem"
+  >
+    <div
+      style="justify-content: center"
+      data-aos="zoom-in"
+      data-aos-duration="500"
+      data-aos-easing="ease-in-sine"
+    >
+    <div style="display: inline;">
+      <img style="display: block;padding-left: 3.5rem;" src="../../assets/images/chat.png" />
+      <h1 style="margin-top: 2rem;font-weight: bold;">Online chat with doctors</h1>
+    </div>
+      </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+  <mat-grid-list cols="4">
+    <mat-grid-tile [colspan]="4">
+
+      <div
+        style="justify-content: center;"
+        data-aos="fade-right"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-sine"
+      >
+        <img
+          src="../../assets/gifs/Doctors.gif"
+        />
       </div>
     </mat-grid-tile>
   </mat-grid-list>
+

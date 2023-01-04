@@ -23,12 +23,32 @@ body { margin: 0; font-family: juana, "Helvetica Neue", sans-serif; }
   src: url("./assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf");
 }
 
+@font-face {
+  font-family: "Zefani";
+  src: url("./assets/fonts/Zefani_Uppercase_Demo-Regular.otf");
+}
+
+@font-face {
+  font-family: "GTWalsheimPro";
+  src: url("./assets/fonts/GTWalsheimPro-CondensedLight.ttf");
+}
+
+@font-face {
+  font-family: "GTWalsheimProBold";
+  src: url("./assets/fonts/GTWalsheimPro-CondensedBold.ttf");
+}
+
+@font-face {
+  font-family: "GTWalsheimProBlack";
+  src: url("./assets/fonts/GTWalsheimPro-CondensedBlack.ttf");
+}
+
 .mat-body,
 .mat-body-1,
 .mat-typography .mat-body,
 .mat-typography .mat-body-1,
 .mat-typography {
-  font-family: OpenSans !important;
+  font-family: GTWalsheimPro !important;
 }
 h1,
 h2,
@@ -43,5 +63,5 @@ p,
 input,
 button,
 a {
-  font-family: OpenSans !important;
+  font-family: GTWalsheimPro !important;
 }

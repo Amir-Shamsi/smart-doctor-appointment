@@ -35,8 +35,7 @@
               "src/assets/css/aos.css",
               "src/assets/css/bootstrap.min.css",
               "src/styles.scss"
-
-            ],
+                        ],
             "scripts": [
               "src/assets/js/aos.js",
               "src/assets/js/bootstrap.min.js",

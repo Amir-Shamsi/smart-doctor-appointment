@@ -36,12 +36,22 @@ export class ForgotPasswordComponent implements OnInit {
       "email" : this.form.value.email,
     }
     console.log(forgotPassword);
-    this.post.forgotPassword(forgotPassword).subscribe(res => {console.log(res)})
-    this.alert();
+    this.post.forgotPassword(forgotPassword).subscribe({
+      next: (res) => {
+        console.log("forgotPass res", res);
+        this.alert();
+      },
+      error: (err:any) =>{
+        console.log('error', err.error.detail);
+      alert(
+        'Sorry there is a problem with your information ❌ \n' + err.error.detail
+      );
+      }
+    })
   }
 
   alert(){
-    alert("Check your index and spam! Password Reset URL sent to your email.");
+    alert("Check your email inbox and spams! Password Reset URL has been sent to your email.");
     this.router.navigate(['register'])
   }
 }

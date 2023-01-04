@@ -27,6 +27,12 @@ import { HttpClient } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +40,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,12 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatRadioModule,
     HttpClientModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule,
+    MatStepperModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

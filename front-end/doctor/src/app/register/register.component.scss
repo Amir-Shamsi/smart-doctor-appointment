@@ -1,3 +1,78 @@
+.body {
+  background: linear-gradient(-45deg, #027e7a, #fcfcfc, #7e0206);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+  overflow-y: hidden;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .mat-tab-group {
   margin-bottom: 48px;
+}
+
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 0px;
+}
+
+.loginb {
+  margin-left: 0.7rem;
+  width: 340px;
+  height: 40px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.loginb:hover {
+  background-color: white;
+  color: #7e0206;
+}
+
+.loginb:focus {
+  background-color: white;
+  color: #7e0206;
+}
+
+.signb {
+  margin-right: 0.5rem;
+  width: 340px;
+  height: 40px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.signb:hover {
+  background-color: white;
+  color: #7e0206;
+}
+
+.signb:focus {
+  background-color: white;
+  color: #7e0206;
 }
