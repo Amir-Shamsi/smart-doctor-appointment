@@ -7,11 +7,14 @@ from .dataset import symptoms_label
 from django.conf import settings
 from .model_core import DiseasePrediction
 
+
 class PredictHandler(DiseasePrediction):
     def __init__(self, symptoms):
         super().__init__()
         try:
-            load(str(str(settings.BASE_DIR) + 'deci_model/' + f'__mnb' + '.joblib'))
+            load(
+                str(str(settings.BASE_DIR) + 'deci_model/' + f'__mnb' + '.joblib')
+            )
         except Exception:
             self.train_model()
         symp = symptoms_label.symptoms.copy()
@@ -27,7 +30,8 @@ class PredictHandler(DiseasePrediction):
     @staticmethod
     def get_precaution(disease):
         info = {}
-        with open(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/' + 'symptom_precaution.csv', mode='r') as infile:
+        with open(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/' + 'symptom_precaution.csv',
+                  mode='r') as infile:
             reader = csv.reader(infile)
             for row in reader:
                 info[row[0]] = row[1:]
@@ -42,4 +46,3 @@ class PredictHandler(DiseasePrediction):
         #     for row in reader:
         #         info[row[0]] = row[1:]
         # return info[disease]
-
