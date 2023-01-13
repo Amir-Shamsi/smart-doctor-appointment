@@ -73,7 +73,8 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
-    'http://127.0.0.1:4200'
+    'http://127.0.0.1:4200',
+    'https://smart-appointment.iran.liara.run'
 ]
 
 ROOT_URLCONF = 'SDABackend.urls'
@@ -103,10 +104,11 @@ WSGI_APPLICATION = 'SDABackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sda_db',
-        'HOST': 'localhost',
+        'NAME': 'competent_cocks',
+        'HOST': 'may.iran.liara.ir',
         'USER': 'root',
-        'PASSWORD': ''
+        'PORT': '31742',
+        'PASSWORD': 'QIOKDMaeZ9meVVrPmsLhpkx9'
     }
 }
 
@@ -179,6 +181,6 @@ AUTH_USER_MODEL = "appAuth.CustomUser"
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_USER=f'{config("EMAIL_HOST")}@gmail.com'
-EMAIL_HOST_PASSWORD=config('EMAIL_PASSWORD')
+EMAIL_HOST_USER=f'smart.doctor.appointment@gmail.com'
+EMAIL_HOST_PASSWORD='siufabgdfxiwdhjm'
 EMAIL_USE_TLS=True
