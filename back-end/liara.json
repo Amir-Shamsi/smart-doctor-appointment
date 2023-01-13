@@ -1,0 +1,9 @@
+{
+  "app":  "sd-appointment",
+  "disks": [
+    {
+      "name": "sda",
+      "mountTo": "appDisease/predictor"
+    }
+  ]
+}
