@@ -14,7 +14,7 @@ interpreter/
 data/
 db/
 
-#*/migrations/*.py
+*/migrations/*.py
 
 
 # Distribution / packaging
