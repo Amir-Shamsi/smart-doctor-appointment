@@ -85,6 +85,7 @@
   }
   ```
   4. Posting ***Doctor Credetials*** so doctors can register
+  ```
   python3
   url: auth/users
   method: POST
@@ -123,3 +124,4 @@
     "is_doctor": true,
     "doctor_code": "testtt"
   }
+  ```
