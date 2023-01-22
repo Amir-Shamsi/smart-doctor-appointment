@@ -84,3 +84,42 @@
                       Diagnosis is often based on symptoms and physical examination..."""
   }
   ```
+  4. Posting ***Doctor Credetials*** so doctors can register
+  python3
+  url: auth/users
+  method: POST
+  
+  # Request Sample
+  {
+    "personal_ID": "2420704770",
+    "first_name": "Arman",
+    "last_name": "Keshavarzi",
+    "email": "keshavarzi.m380@gmail.com",
+    "city": 1,
+    "contact_number": "09164067931",
+    "gender": false,
+    "birth_date": "1998-11-26",
+    "has_health_insurance": false,
+    "zip_code": "hellow",
+    "health_insurance_company": null,
+    "is_doctor": true,
+    "doctor_code": "testtt"
+  }
+
+  # Response Sample
+  {
+    "id": 2,
+    "personal_ID": "2420704770",
+    "first_name": "Arman",
+    "last_name": "Keshavarzi",
+    "email": "keshavarzi.m380@gmail.com",
+    "city": 1,
+    "contact_number": "09164067931",
+    "gender": false,
+    "birth_date": "1998-11-26",
+    "has_health_insurance": false,
+    "zip_code": "hellow",
+    "health_insurance_company": null,
+    "is_doctor": true,
+    "doctor_code": "testtt"
+  }
