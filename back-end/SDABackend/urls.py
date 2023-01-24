@@ -23,5 +23,6 @@ urlpatterns = [
     path('auth/', include('appAuth.urls')),
     path('api/', include('appApi.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('disease/', include('appDisease.urls'))
+    path('disease/', include('appDisease.urls')),
+    path('ticket/', include('appChat.urls'))
 ]
