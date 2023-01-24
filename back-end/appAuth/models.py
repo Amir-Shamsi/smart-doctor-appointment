@@ -36,10 +36,13 @@ class CustomUser(AbstractUser):
             return f'{self.first_name} {self.last_name}'
         return self.personal_ID
 
+
 class PatientFile(models.Model):
-    patient = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="file")
     file_ID = models.CharField(unique=True, default=uuid.uuid4().hex[:6].upper(), max_length=6)
     date_created = models.DateTimeField(auto_now=True)
+    # this field determines every patient doctor(s)
+    patient_doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="doctor", default=None)
 
 class UserHashTable(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
