@@ -49,7 +49,8 @@ INSTALLED_APPS = [
 
     'appAuth',
     'appApi',
-    'appDisease'
+    'appDisease',
+    'appChat'
 ]
 
 INTERNAL_IPS = [
