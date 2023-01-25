@@ -23,8 +23,8 @@ class CustomUser(AbstractUser):
     health_insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.PROTECT, blank=True, null=True)
 
     # these fields are related to doctors
-    is_doctor = models.BooleanField(default=False)
-    doctor_code = models.CharField(max_length=6, default=None)
+    is_doctor = models.BooleanField(default=False, blank=True, null=True)
+    doctor_code = models.CharField(max_length=6, default=None, blank=True, null=True)
 
     USERNAME_FIELD = 'personal_ID'
     REQUIRED_FIELDS = []
