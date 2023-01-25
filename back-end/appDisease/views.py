@@ -84,7 +84,7 @@ class DiseaseController:
         patientFile.disease = disease
         patientFile.save()
 
-        return Response({'Appointment have been set!'})
+        return Response({'Appointment set successfully!'})
 
 
 class CreateRecipeViewSet(ModelViewSet):

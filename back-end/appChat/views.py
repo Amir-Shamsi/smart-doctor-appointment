@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from appAuth.models import PatientFile
-from .serializers import CreateTicketSerializer, TicketSerializer, SendMessageSerializer, MessageSerializer
+from .serializers import CreateTicketSerializer, TicketSerializer, SendMessageSerializer, MessageSerializer, \
+    DrPatientSerializer
 from .models import Ticket, Message
 
 from django.db.models import Q
@@ -63,3 +64,18 @@ def get_available_doctors(request):
                 'last_name': doci.last_name
             })
     return Response(available_docs)
+
+@api_view(['GET'])
+def get_patients(request):
+    if request.user.is_anonymous:
+        return Response({'You must login first!'})
+
+    if not request.user.is_doctor:
+        return Response({'Access denied!'})
+    patients = []
+    tmp_p = PatientFile.objects.filter(patient_doctor=request.user)
+    for p in tmp_p:
+        if p not in patients: patients.append(p)
+
+    serz = DrPatientSerializer(instance=patients, many=True)
+    return Response(serz.data)
