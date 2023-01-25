@@ -1,4 +1,47 @@
 # Smart Doctor Appointment (SDA) Backend
+
+## Third Sprint
+```
+url: disease/get-doctors/
+method: POST
+
+request sample: 
+{
+    "disease": "common cold"
+}
+
+response sample:
+[   
+    ...
+    {
+        "id": 1214,
+        "first_name": "Amir",
+        "last_name": "Askari"
+    }
+    ...
+]
+
+-----------------------------------
+
+url: disease/set-appointment/
+method: POST
+
+request sample: 
+{
+    "disease": "common cold",
+    "doctor_id" = 1214,
+    "detail" = "This is a sample text.",
+    "date" = "2023-01-26"
+}
+
+response sample:
+{
+    'Appointment set successfully!'
+}
+
+```
+
+
 ## Second Sprit
 ### API details
   1. Getting ***intro. questions*** that patients must answer before all.
