@@ -2,6 +2,21 @@
 
 ## Third Sprint
 ```
+url: ticket/get-patients/
+method: GET
+
+response sample:
+[
+    ...
+    {
+        "id": 1005,
+        "first_name": "Amir",
+        "last_name": "Shamsi"
+    }
+    ...
+]
+
+-----------------------------------------------
 url: disease/get-doctors/
 method: POST
 
