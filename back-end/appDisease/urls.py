@@ -4,6 +4,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register("question-intro", viewset=views.DiseaseController.QuestionIntroSet, basename="question-intro")
+router.register("send-recipe", viewset=views.CreateRecipeViewSet, basename="send-recipe")
 
 urlpatterns = router.urls
 urlpatterns += [

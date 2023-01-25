@@ -1,6 +1,3 @@
-import datetime
-import hashlib
-import pytz
 from django.template.loader import get_template
 from rest_framework import status
 from django.core.mail import EmailMultiAlternatives
@@ -11,6 +8,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .predictor import model_core, handler
 from .serializers import *
+from .permissions import IsDoctor
 
 class DiseaseController:
     class QuestionIntroSet(ModelViewSet):
@@ -47,4 +45,25 @@ class DiseaseController:
 
 
 
+
+class CreateRecipeViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated, IsDoctor]
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return CreateRecipeSerializer
+        return RecipeSerializer
+    def get_queryset(self):
+        doctor = self.request.user
+        recipes = Recipe.objects.filter(doctor = doctor).all()
+        return recipes
+    
+    def get_serializer_context(self):
+        return {"user": self.request.user}
+    
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(doctor=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
