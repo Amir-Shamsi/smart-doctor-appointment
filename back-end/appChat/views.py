@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
@@ -75,7 +76,7 @@ def get_patients(request):
     patients = []
     tmp_p = PatientFile.objects.filter(patient_doctor=request.user)
     for p in tmp_p:
-        if p not in patients: patients.append(p)
-
-    serz = DrPatientSerializer(instance=patients, many=True)
+        if p not in patients: patients.append(p.patient.id)
+    users = get_user_model().objects.filter(id__in=patients)
+    serz = DrPatientSerializer(instance=users, many=True)
     return Response(serz.data)
