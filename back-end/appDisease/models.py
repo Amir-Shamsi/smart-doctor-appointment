@@ -19,7 +19,7 @@ class Medicine(models.Model):
 
 class Recipe(models.Model):
     doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="recipe")
-    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="patient-recipe")
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="patient_recipe")
     created_at = models.DateTimeField(auto_now=True)
-    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name="needed-drugs")
+    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name="needed_drugs")
     description = models.CharField(max_length=2000)
