@@ -18,7 +18,7 @@ class TicketViewSet(ModelViewSet):
         return TicketSerializer
 
     def get_queryset(self):
-        return Ticket.objects.filter(Q(user = self.request.user) | Q(doctor = self.request.user))
+        return Ticket.objects.filter(Q(user = self.request.user) | Q(doctor = self.request.user)).order_by("created_at")
     
     def get_serializer_context(self):
         return {"user": self.request.user, "ticket_id": None if self.kwargs.get("pk") is None else self.kwargs["pk"] }
@@ -31,7 +31,7 @@ class MessageViewSet(ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         ticket_id = self.kwargs["nested_1_pk"]
-        messages = Message.objects.filter(ticket_id = ticket_id).all()
+        messages = Message.objects.filter(ticket_id = ticket_id).all().order_by("created_at")
         return messages
     
     def get_serializer_class(self):
