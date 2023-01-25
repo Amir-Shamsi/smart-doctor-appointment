@@ -108,3 +108,12 @@ class CreateRecipeViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save(doctor=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def get_book_history(request):
+    if request.user.is_anonymous:
+        return Response({'You must login first!'})
+
+    patients_files = PatientFile.objects.filter(patient=request.user)
+    serz = BookHistorySerializer(instance=patients_files, many=True)
+    return Response(serz.data)

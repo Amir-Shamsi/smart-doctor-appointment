@@ -11,5 +11,6 @@ urlpatterns += [
     path('symptoms/', views.DiseaseController.get_symptoms),
     path('analysis/', views.DiseaseController.disease_data_analysis),
     path('get-doctors/', views.DiseaseController.get_related_doctors),
-    path('set-appointment/', views.DiseaseController.set_appointment)
+    path('set-appointment/', views.DiseaseController.set_appointment),
+    path('book-history/', views.get_book_history)
 ]

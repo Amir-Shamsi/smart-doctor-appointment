@@ -69,3 +69,8 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = ["id"]
+
+class BookHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientFile
+        fields = ["file_ID", "disease", "patient_doctor", "appointment_date", "date_created", "detail"]
