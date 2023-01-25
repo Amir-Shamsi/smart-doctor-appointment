@@ -1,8 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from appAuth.models import PatientFile
 from .serializers import CreateTicketSerializer, TicketSerializer, SendMessageSerializer, MessageSerializer
 from .models import Ticket, Message
 
@@ -22,9 +24,6 @@ class TicketViewSet(ModelViewSet):
     
     def get_serializer_context(self):
         return {"user": self.request.user, "ticket_id": None if self.kwargs.get("pk") is None else self.kwargs["pk"] }
-
-        
-
 
 class MessageViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -48,4 +47,19 @@ class MessageViewSet(ModelViewSet):
         ticket_id = self.kwargs["nested_1_pk"]
         message = Message.objects.create(message=message, sender=sender, ticket_id=ticket_id)
         return Response({"message": message.message}, status=status.HTTP_201_CREATED)
-    
+
+@api_view(['GET'])
+def get_available_doctors(request):
+    if request.user.is_anonymous:
+        return Response({'You must login first!'})
+    available_docs = []
+    docs = PatientFile.objects.filter(patient=request.user)
+    for doc in docs:
+        if doc.patient_doctor not in available_docs:
+            doci = doc.patient_doctor
+            available_docs.append({
+                'id': doci.id,
+                'first_name': doci.first_name,
+                'last_name': doci.last_name
+            })
+    return Response(available_docs)
