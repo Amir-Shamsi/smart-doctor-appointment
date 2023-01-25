@@ -40,6 +40,7 @@ class CustomUser(AbstractUser):
 class PatientFile(models.Model):
     patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="file")
     file_ID = models.CharField(unique=True, default=uuid.uuid4().hex[:6].upper(), max_length=6)
+    detail = models.TextField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now=True)
     # this field determines every patient doctor(s)
     patient_doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="doctor", default=None)
