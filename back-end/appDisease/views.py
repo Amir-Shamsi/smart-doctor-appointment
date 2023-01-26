@@ -77,7 +77,7 @@ class DiseaseController:
         serz = AppointmentSeriallizer(data=request.data)
         serz.is_valid(raise_exception=True)
         disease = serz.validated_data['disease']
-        doctor_id = int(serz.validated_data['doctor_id'])
+        doctor_id = get_user_model().objects.get(id=int(serz.validated_data['doctor_id']))
         detail = serz.validated_data['detail']
         date = serz.validated_data['date']
 
