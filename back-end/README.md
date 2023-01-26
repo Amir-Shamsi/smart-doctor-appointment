@@ -2,6 +2,23 @@
 
 ## Third Sprint
 ```
+url: disease/book-history/
+method: GET
+
+response sample:
+[   
+    ...
+    {
+        "file_ID": "324234",
+        "disease": "cold common",
+        "patient_doctor": 1006,
+        "appointment_date": "2023-01-26",
+        "date_created": "2023-01-26T00:00:58Z",
+        "detail": null
+    }
+    ...
+]
+-----------------------------------------------
 url: ticket/get-patients/
 method: GET
 
