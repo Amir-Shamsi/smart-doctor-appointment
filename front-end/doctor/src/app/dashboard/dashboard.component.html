@@ -2118,7 +2118,22 @@
         <div *ngIf="book == true">
           <ol style="list-style: none">
             <li *ngFor="let dr of suggestedDr; let i = index">
-              {{ dr.first_name + dr.last_name }}
+              <mat-card style="margin-top: 1rem;margin-right: 3rem;">
+                <p>Doctor Name : Dr. {{dr.first_name + ' ' + dr.last_name}}</p>
+                <p>Enter your appointment date : </p>
+                <div>
+                  <input
+                      type="text"
+                      style="width: 200px;"
+                      matInput
+                      placeholder="2000-01-01"
+                      [required]="true"
+                      [(ngModel)]="appointment_date"
+                    />
+                    <p>{{appointment_date}}</p>
+                </div>
+                <button class="btn nextB" style="margin-left: 25rem;" (click)="onBookDoctor(dr.id)">BOOK</button>
+              </mat-card>
             </li>
           </ol>
         </div>
@@ -2126,17 +2141,19 @@
     </div>
 
     <div *ngIf="buttonContent == 'history'">
+      <mat-card class="Card">
       <ol style="list-style: none">
         <li *ngFor="let book of bookedHistory let i = index">
           <mat-card>
               <mat-card-content>
-                <p>your disease : book.disease</p>
-                <p>more about your disease: book.detail</p>
-                <p>appointment date : book.appointment_date</p>
+                <p>your disease : {{book.disease}}</p>
+                <p>more about your disease: {{book.detail}}</p>
+                <p>appointment date : {{book.appointment_date}}</p>
               </mat-card-content>
           </mat-card>
         </li>
       </ol>
+    </mat-card>
     </div>
 
     <div *ngIf="buttonContent == 'chat'">
