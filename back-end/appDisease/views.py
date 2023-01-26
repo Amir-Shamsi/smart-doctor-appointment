@@ -4,6 +4,7 @@ from rest_framework.permissions import *
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import *
+from django.conf import settings
 from .serializers import *
 from .predictor import handler
 from .serializers import *
@@ -52,7 +53,7 @@ class DiseaseController:
         serz = DiseasePostSerializer(data=request.data)
         serz.is_valid(raise_exception=True)
         disease = serz['disease']
-        specialist_disease = open('predictor/dataset/DoctorRecommendation.csv').read().split('\n')
+        specialist_disease = open(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/DoctorRecommendation.csv').read().split('\n')
         specialist = ''
         for sd in specialist_disease:
             if disease in sd.split(',')[0].strip():
