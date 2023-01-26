@@ -1,3 +1,5 @@
+import csv
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import *
@@ -52,13 +54,15 @@ class DiseaseController:
             return Response({'You must login first!'})
         serz = DiseasePostSerializer(data=request.data)
         serz.is_valid(raise_exception=True)
-        disease = serz['disease']
-        specialist_disease = open(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/DoctorRecommendation.csv').read().split('\n')
+        disease = serz.validated_data['disease']
+        specialist_disease = open(f'{settings.BASE_DIR}/appDisease/predictor/dataset/DoctorRecommendation.csv')
+        csv_r = csv.reader(specialist_disease, delimiter=',')
         specialist = ''
-        for sd in specialist_disease:
-            if disease in sd.split(',')[0].strip():
-                specialist = sd.split(',')[1].strip()
+        for sd in csv_r:
+            if disease == sd[0].strip().lower():
+                specialist = sd[1].strip()
                 break
+        print(specialist)
         User = get_user_model()
         docs = User.objects.filter(expertise=specialist)
 
