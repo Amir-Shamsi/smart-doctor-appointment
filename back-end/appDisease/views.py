@@ -76,10 +76,10 @@ class DiseaseController:
             return Response({'You must login first!'})
         serz = AppointmentSeriallizer(data=request.data)
         serz.is_valid(raise_exception=True)
-        disease = serz['disease']
-        doctor_id = int(serz['doctor_id'])
-        detail = serz['detail']
-        date = serz['date']
+        disease = serz.validated_data['disease']
+        doctor_id = int(serz.validated_data['doctor_id'])
+        detail = serz.validated_data['detail']
+        date = serz.validated_data['date']
 
         patientFile = PatientFile()
         patientFile.patient = request.user
