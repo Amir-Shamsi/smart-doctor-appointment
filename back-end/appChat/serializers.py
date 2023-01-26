@@ -35,7 +35,7 @@ class CreateTicketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ticket
-        fields = ["title", "content", "patient_doctor"]
+        fields = ["title", "content", "patient_doctor", "id"]
 
     def save(self, **kwargs):
         doctor = self.validated_data["patient_doctor"]

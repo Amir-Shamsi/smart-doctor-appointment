@@ -1,37 +1,36 @@
-<mat-grid-list cols="5">
+<mat-grid-list cols="5" >
   <mat-grid-tile style="background-color: #ffffff; height: 665px" colspan="1">
     <div style="display: block; text-align: center">
-      <div (click)="onLogoClick()" style="cursor: pointer">
+
+      <div (click)="onLogoClick()" style="cursor: pointer;">
         <img
-          src="../../assets/images/logo.png"
-          style="height: 40px; width: 40px; margin-bottom: 1rem"
-        />
-        <span
-          style="
-            font-family: GTWalsheimProBlack !important;
-            font-weight: bold;
-            font-size: 30px;
-            color: #000000;
-            padding-left: 0.5rem;
-          "
-          >We</span
-        >
-        <span
-          style="
-            font-family: GTWalsheimProBlack !important;
-            font-weight: bold;
-            font-size: 30px;
-            color: #027e7a;
-          "
-          >Care</span
-        >
+        src="../../assets/images/logo.png"
+        style="height: 40px; width: 40px; margin-bottom: 1rem;"
+      />
+      <span
+        style="
+          font-family: GTWalsheimProBlack !important;
+          font-weight: bold;
+          font-size: 30px;
+          color: #000000;
+          padding-left: 0.5rem;
+        "
+        >We</span
+      >
+      <span
+        style="
+          font-family: GTWalsheimProBlack !important;
+          font-weight: bold;
+          font-size: 30px;
+          color: #027e7a;
+        "
+        >Care</span
+      >
       </div>
 
-      <div style="padding-bottom: 2rem; margin-top: 2rem">
-        <img class="img" src="../../assets/images/account.png" />
-        <p style="margin-top: 0.5rem; font-size: 16px">
-          {{ firstName + " " + lastName }}
-        </p>
+      <div style="padding-bottom: 2rem;margin-top: 2rem;">
+        <img class="img" src="../../assets/images/account.png"/>
+        <p style="margin-top: 0.5rem;font-size: 16px;">Dr. {{firstName + ' ' +  lastName}}</p>
       </div>
       <div style="display: block; text-align: center">
         <button
@@ -40,15 +39,15 @@
           (click)="buttonClicked('book')"
         >
           <mat-icon class="icon1">add</mat-icon>
-          <span class="span-sidebar">Book a doctor</span>
+          <span class="span-sidebar">My patients</span>
         </button>
         <button
           class="button"
           mat-raised-button
           (click)="buttonClicked('history')"
         >
-          <mat-icon class="icon1">history</mat-icon>
-          <span class="span-sidebar">Bookings history</span>
+          <mat-icon class="icon1">Chat with patients</mat-icon>
+          <span class="span-sidebar">Prescription</span>
         </button>
         <button
           class="button"
@@ -1818,492 +1817,90 @@
         </div>
 
         <div style="display: inline">
-          <mat-card
-            style="display: inline-block; width: 400px; box-shadow: none"
-          >
-            <h1 style="display: inline">
-              Welcome🙂<br />
-              We are here to care about your Health<br />
-              use left menu to use our services
-            </h1>
-          </mat-card>
+          <mat-card style="display: inline-block;width: 400px;box-shadow: none;">
+           <h1 style="display: inline;">
+            Welcome🙂<br/> We are here to help you caring about your patients health<br/>
+            use left menu to use our services
+          </h1>
+        </mat-card>
+
         </div>
       </mat-card>
     </div>
 
-    <div *ngIf="buttonContent == 'book'">
-      <mat-card class="Card">
-        <mat-card-header style="background-color: #08a29e; border-radius: 5px">
-          <mat-card-title
-            style="
-              font-family: GTWalsheimProBold !important;
-              padding-top: 1rem;
-              color: white;
-            "
-            >BOOKING A DOCTOR</mat-card-title
-          >
-          <mat-card-subtitle style="color: rgb(231, 231, 231); font-size: 14px"
-            >Start booking a doctor here</mat-card-subtitle
-          >
-        </mat-card-header>
-
-        <div *ngIf="book == false">
-          <mat-stepper
-            linear
-            #stepper
-            style="padding-top: 1rem"
-            *ngIf="!finishButton"
-          >
-            <mat-step [editable]="true">
-              <div>
-                <ng-template matStepLabel>Answer all questions</ng-template>
-                <div style="padding-top: 2rem">
-                  <ol>
-                    <li *ngFor="let q of qIntro; let i = index">
-                      <div style="display: inline-block">
-                        <span style="font-size: 20px; padding-bottom: 1rem">{{
-                          q.question
-                        }}</span>
-                        <mat-radio-group class="example-radio-group">
-                          <mat-radio-button
-                            class="rb{{ i }} yn{{ opt }}"
-                            *ngFor="let opt of options"
-                            [value]="opt"
-                            (change)="qIntroChange($event, i)"
-                          >
-                            <span style="font-size: 20px">{{ opt }}</span>
-                          </mat-radio-button>
-                        </mat-radio-group>
-                      </div>
-                    </li>
-                  </ol>
-                </div>
-
-                <div style="text-align: right; padding-right: 3rem">
-                  <button
-                    mat-button
-                    matStepperNext
-                    class="btn nextB"
-                    [disabled]="!nextEnable1"
-                  >
-                    NEXT
-                  </button>
-                </div>
-              </div>
-            </mat-step>
-
-            <mat-step [editable]="true">
-              <div style="padding-top: 3rem">
-                <ng-template matStepLabel>Select your symptoms</ng-template>
-                <mat-form-field class="example-chip-list">
-                  <mat-label style="font-size: 20px">select symptoms</mat-label>
-                  <mat-chip-list
-                    #chipList
-                    aria-label="Symptoms selection"
-                    style="padding: 0.5rem"
-                  >
-                    <mat-chip
-                      *ngFor="let symp of symptomsSelected"
-                      (removed)="remove(symp)"
-                    >
-                      <span style="font-size: 20px">{{ symp }}</span>
-                      <button matChipRemove>
-                        <mat-icon>cancel</mat-icon>
-                      </button>
-                    </mat-chip>
-                    <input
-                      placeholder="New Symptoms ... "
-                      #symptomsInput
-                      [formControl]="sympCtrl"
-                      [matAutocomplete]="auto"
-                      [matChipInputFor]="chipList"
-                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                      (matChipInputTokenEnd)="add($event)"
-                    />
-                  </mat-chip-list>
-                  <mat-autocomplete
-                    #auto="matAutocomplete"
-                    (optionSelected)="selected($event)"
-                  >
-                    <mat-option
-                      *ngFor="let fsymp of filteredSymptoms | async"
-                      [value]="fsymp"
-                    >
-                      {{ fsymp }}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-
-                <div
-                  style="
-                    text-align: right;
-                    padding-top: 11rem;
-                    padding-right: 3rem;
-                    display: flex;
-                    flex-direction: row-reverse;
-                  "
-                  *ngIf="symptomsSelected.length == 0"
-                >
-                  <button
-                    mat-button
-                    matStepperNext
-                    class="btn nextB"
-                    [disabled]="true"
-                    style="
-                      font-size: 14px;
-                      width: 210px;
-                      color: rgb(204, 204, 204);
-                    "
-                  >
-                    <span style="font-size: 18px"
-                      >Enter at least ONE symptom</span
-                    >
-                  </button>
-                  <div style="padding-right: 1rem; padding-top: rem">
-                    <button mat-button matStepperPrevious class="btn preB">
-                      PREVIOUS
-                    </button>
-                  </div>
-                </div>
-
-                <div
-                  *ngIf="symptomsSelected.length != 0"
-                  style="display: flex; flex-direction: row-reverse"
-                >
-                  <div style="padding-top: 10rem">
-                    <button mat-button matStepperNext class="btn nextB">
-                      NEXT
-                    </button>
-                  </div>
-                  <div style="padding-right: 1rem; padding-top: 10rem">
-                    <button mat-button matStepperPrevious class="btn preB">
-                      PREVIOUS
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </mat-step>
-
-            <mat-step>
-              <ng-template matStepLabel>Enter your details</ng-template>
-              <div style="padding-top: 2rem">
-                <textarea
-                  style="font-size: 20px"
-                  [(ngModel)]="detailed"
-                  class="textbox"
-                  placeholder="Enter your other health situation details or symptoms"
-                ></textarea>
-              </div>
-
-              <div style="display: flex; flex-direction: row-reverse">
-                <div style="padding-top: 5rem">
-                  <button
-                    mat-button
-                    matStepperNext
-                    class="btn nextB"
-                    (click)="onFinish()"
-                  >
-                    FINISH
-                  </button>
-                </div>
-                <div style="padding-right: 1rem; padding-top: 5rem">
-                  <button mat-button matStepperPrevious class="btn preB">
-                    PREVIOUS
-                  </button>
-                </div>
-              </div>
-            </mat-step>
-          </mat-stepper>
-        </div>
-
-        <div *ngIf="finishButton">
-          <div>
-            <div style="display: flex">
-              <p
-                style="
-                  text-align: center;
-                  font-weight: bold;
-                  padding: 2rem;
-                  font-size: 16px;
-                "
-              >
-                Our smart diagnose system detected your illness ✔
-              </p>
-              <button
-                (click)="onBook()"
-                style="
-                  font-size: 20px;
-                  height: 50px;
-                  width: 350px;
-                  border: none;
-                  background-color: #a2080c;
-                  margin-top: 1rem;
-                  border-radius: 5px;
-                  color: white;
-                  font-weight: bold;
-                  margin-left: 12rem;
-                "
-              >
-                Find Best Doctor
-              </button>
-            </div>
-            <div style="display: inline-flex">
-              <p
-                style="
-                  padding-left: 2.5rem;
-                  font-family: GTWalsheimProBold !important;
-                "
-              >
-                Your disease
-              </p>
-              <mat-card
-                style="margin-left: 6rem; width: 700px; background-color: none"
-              >
-                {{ disease }}
-              </mat-card>
-            </div>
-
-            <div style="display: inline-flex; padding-top: 3rem">
-              <p
-                style="
-                  padding-left: 2rem;
-                  font-family: GTWalsheimProBold !important;
-                "
-              >
-                You'd better do<br />these steps before<br />visiting a doctor
-              </p>
-              <mat-card
-                style="
-                  margin-left: 4.6rem;
-                  width: 700px;
-                  background-color: none;
-                "
-              >
-                <mat-card-content
-                  [style.overflow]="'auto'"
-                  [style.height.px]="'30'"
-                >
-                  {{ precaution }}
-                </mat-card-content>
-              </mat-card>
-            </div>
-
-            <div style="display: inline-flex; padding-top: 3rem">
-              <p
-                style="
-                  padding-left: 1.9rem;
-                  font-family: GTWalsheimProBold !important;
-                "
-              >
-                More about your disease
-              </p>
-              <mat-card
-                style="
-                  margin-left: 2.5rem;
-                  width: 700px;
-                  background-color: none;
-                "
-              >
-                <mat-card-content
-                  [style.overflow]="'auto'"
-                  [style.height.px]="'150'"
-                >
-                  {{ description }}
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </div>
-        </div>
-
-        <div *ngIf="book == true">
-          <ol style="list-style: none">
-            <li *ngFor="let dr of suggestedDr; let i = index">
-              {{ dr.first_name + dr.last_name }}
-            </li>
-          </ol>
-        </div>
-      </mat-card>
-    </div>
-
-    <div *ngIf="buttonContent == 'history'">
-      <ol style="list-style: none">
-        <li *ngFor="let book of bookedHistory let i = index">
-          <mat-card>
-              <mat-card-content>
-                <p>your disease : book.disease</p>
-                <p>more about your disease: book.detail</p>
-                <p>appointment date : book.appointment_date</p>
-              </mat-card-content>
-          </mat-card>
-        </li>
-      </ol>
-    </div>
+    <div *ngIf="buttonContent == 'history'">history selected</div>
 
     <div *ngIf="buttonContent == 'chat'">
       <mat-card class="Card">
-        <mat-card-header
-          style="
-            background-color: #08a29e;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-          "
-        >
+        <mat-card-header style="background-color: #08a29e; border-radius: 5px;margin-bottom: 1rem;">
           <mat-card-title
-            style="
-              font-family: GTWalsheimProBold !important;
-              padding-top: 1rem;
-              color: white;
-            "
+            style="font-family: GTWalsheimProBold !important;padding-top: 1rem; color: white"
             >CHAT WITH DOCTORS</mat-card-title
           >
           <mat-card-subtitle style="color: rgb(231, 231, 231); font-size: 14px"
             >Chat with your doctors about your health here</mat-card-subtitle
           >
         </mat-card-header>
-        <ol
-          style="list-style: none; margin-left: 20rem"
-          *ngIf="IsSelectDoctor == false"
-        >
-          <li *ngFor="let doc of doctors; let i = index">
-            <mat-card
-              (click)="onDoctorChat(doc.id)"
-              style="
-                text-align: center;
-                width: 250px;
-                margin-top: 2rem;
-                margin-right: 2rem;
-              "
-              class="mtcrd"
-            >
-              <span style="font-size: 20px"
-                >Dr. {{ doc.first_name + " " + doc.last_name }}</span
-              >
+        <ol style="list-style: none;margin-left: 20rem;" *ngIf="IsSelectPatient == false">
+          <li *ngFor="let pnt of patients let i=index">
+            <mat-card (click)="onPatientChat(pnt.id)" style="text-align: center;width: 250px;;margin-top: 2rem;margin-right: 2rem;" class="mtcrd">
+              <span style="font-size: 20px;">Dr. {{pnt.first_name + " " + pnt.last_name}}</span>
             </mat-card>
           </li>
         </ol>
 
-        <mat-card
-          *ngIf="IsSelectDoctor == true"
-          style="margin-top: 1rem; height: 490px"
-        >
-          <div style="display: flex">
-            <mat-icon
-              (click)="onBackChat()"
-              style="
-                cursor: pointer;
-                font-size: 30px;
-                margin-top: 0.9rem;
-                margin-right: 0.3rem;
-                color: #a2080c;
-              "
-              >message</mat-icon
-            >
-            <mat-card-header style="margin-bottom: 1rem">
-              <mat-card-title
-                style="
-                  font-family: GTWalsheimProBold !important;
-                  padding-top: 1rem;
-                  color: rgb(0, 0, 0);
-                "
-              >
-                {{ messages[0].title }}
-              </mat-card-title>
-            </mat-card-header>
-          </div>
+        <mat-card *ngIf="IsSelectPatient == true" style="margin-top: 1rem;height: 490px;">
+          <div style="display: flex;">
+          <mat-icon (click)="onBackChat()" style="cursor: pointer;;font-size: 30px;margin-top: 0.9rem;margin-right: 0.3rem;color: #a2080c;">message</mat-icon>
+          <mat-card-header style="margin-bottom: 1rem;">
+            <mat-card-title style="font-family: GTWalsheimProBold !important;padding-top: 1rem; color: rgb(0, 0, 0)">
+              {{messages[0].title}}
+            </mat-card-title>
+          </mat-card-header>
+        </div>
 
           <mat-divider></mat-divider>
-          <mat-card-content [style.overflow]="'auto'" [style.height.px]="'330'">
-            <ol style="list-style: none; margin-top: 1rem">
-              <li *ngFor="let msg of messages; let i = index">
-                <mat-card
-                  *ngIf="i % 2 == 0"
-                  style="
-                    margin-left: 42rem;
-                    background-color: #a2080d85;
-                    margin-top: 1rem;
-                    width: 200px;
-                    height: fit-content;
-                  "
+          <mat-card-content
+                  [style.overflow]="'auto'"
+                  [style.height.px]="'330'"
                 >
-                  {{ msg.content }}
-                </mat-card>
-                <mat-card
-                  *ngIf="i % 2 != 0"
-                  style="
-                    background-color: #ebebeb;
-                    margin-top: 1rem;
-                    width: 200px;
-                    height: fit-content;
-                  "
-                >
-                  {{ msg.content }}
-                </mat-card>
-              </li>
-            </ol>
-          </mat-card-content>
-          <mat-card-footer align="left">
-            <div style="display: flex">
-              <input
-                [(ngModel)]="newMessageContent"
-                style="
-                  font-size: 14px;
-                  padding: 0.5rem;
-                  width: 880px;
-                  margin-left: 3rem;
-                  padding-bottom: 1rem;
-                  border-radius: 5px;
-                  border-color: #027e7a;
-                  border-style: solid;
-                "
-                placeholder="Enter your message ... "
-              />
-              <mat-icon
-                (click)="onSendMessage()"
-                style="
-                  font-size: 40px;
-                  padding-top: 0.2rem;
-                  padding-left: 0.5rem;
-                  color: #a2080c;
-                  cursor: pointer;
-                "
-                >send</mat-icon
-              >
-            </div>
-          </mat-card-footer>
+          <ol style="list-style: none;margin-top: 1rem;">
+            <li *ngFor="let msg of messages let i=index">
+              <mat-card *ngIf="i%2==0" style="margin-left: 42rem;background-color: #a2080d85;margin-top: 1rem;width: 200px;height: fit-content;">
+                {{msg.content}}
+              </mat-card>
+              <mat-card *ngIf="i%2!=0" style="background-color: #ebebeb;margin-top: 1rem;width: 200px;height: fit-content;">
+                {{msg.content}}
+              </mat-card>
+            </li>
+          </ol>
+        </mat-card-content>
+        <mat-card-footer align="left">
+          <div style="display: flex;">
+          <input [(ngModel)]="newMessageContent" style="font-size: 14px;padding: 0.5rem;width: 880px;margin-left: 3rem;padding-bottom: 1rem;border-radius: 5px;border-color: #027e7a;border-style: solid;"
+          placeholder="Enter your message ... "/>
+        <mat-icon (click)="onSendMessage()" style="font-size: 40px;padding-top: 0.2rem;padding-left: 0.5rem;color: #a2080c;cursor: pointer;">send</mat-icon>
+        </div>
+        </mat-card-footer>
         </mat-card>
       </mat-card>
     </div>
 
     <div *ngIf="buttonContent == 'profile'">
       <mat-card class="Card">
-        <div
-          style="
-            padding-bottom: 2rem;
-            margin-top: 2rem;
-            margin-top: 3rem;
-            margin-bottom: 2rem;
-          "
-        >
-          <img
-            class="img"
-            src="../../assets/images/account.png"
-            style="height: 150px; width: 150px; margin-left: 25rem"
-          />
+        <div style="padding-bottom: 2rem;margin-top: 2rem;margin-top: 3rem;margin-bottom: 2rem;">
+          <img class="img" src="../../assets/images/account.png" style="height: 150px;width: 150px;margin-left: 25rem"/>
         </div>
-        <mat-card style="width: 400px; text-align: center; margin-left: 17rem">
-          <p style="font-size: 20px">Email : {{ email }}</p>
-          <p style="font-size: 20px">
-            Full Name : {{ firstName + "   " + lastName }}
-          </p>
-          <p style="font-size: 20px">Birth Date : {{ birth_data }}</p>
-          <p *ngIf="gender == 'true'" style="font-size: 20px">
-            Gender : female
-          </p>
-          <p *ngIf="gender == 'false'" style="font-size: 20px">Gender : male</p>
-          <p style="font-size: 20px">Contact Number : {{ contact_number }}</p>
-          <p style="font-size: 20px">Zip Code : {{ zip_code }}</p>
+        <mat-card style="width: 400px;text-align: center;margin-left: 17rem;">
+          <p style="font-size: 20px;">Email : {{email}}</p>
+          <p style="font-size: 20px;">Full Name : {{firstName + '   ' + lastName}}</p>
+          <p style="font-size: 20px;">Birth Date : {{birth_data}}</p>
+          <p *ngIf="gender == 'true'" style="font-size: 20px;">Gender : female</p>
+          <p *ngIf="gender == 'false'" style="font-size: 20px;">Gender : male</p>
+          <p style="font-size: 20px;">Contact Number : {{contact_number}}</p>
+          <p style="font-size: 20px;">Zip Code : {{zip_code}}</p>
         </mat-card>
-      </mat-card>
-    </div>
+      </mat-card></div>
+
   </mat-grid-tile>
 </mat-grid-list>

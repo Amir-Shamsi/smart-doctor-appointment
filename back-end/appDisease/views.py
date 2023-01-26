@@ -53,7 +53,7 @@ class DiseaseController:
         serz = DiseasePostSerializer(data=request.data)
         serz.is_valid(raise_exception=True)
         disease = serz['disease']
-        specialist_disease = open(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/DoctorRecommendation.csv').read().split('\n')
+        specialist_disease = open(str(str(settings.BASE_DIR) + '/appDisease/predictor/dataset/DoctorRecommendation.csv')).read().split('\n')
         specialist = ''
         for sd in specialist_disease:
             if disease in sd.split(',')[0].strip():

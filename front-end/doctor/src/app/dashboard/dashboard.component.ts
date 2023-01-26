@@ -25,8 +25,54 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class DashboardComponent implements OnInit {
+  doctors: any;
+  IsSelectDoctor: any | boolean = false;
+  doctorId: any;
+  messages: any = [
+    {
+        "title": "headache",
+        "content": "hi doctor, my head is like exploding",
+        "doctor": 1,
+        "created_at": "2023-01-24T08:45:03.577496Z",
+        "id": 5
+    },
+    {
+        "title": "headache",
+        "content": "hi. oh, have you took the medicines?",
+        "doctor": 1,
+        "created_at": "2023-01-24T11:02:40.672334Z",
+        "id": 3
+    },
+    {
+      "title": "headache",
+      "content": "yes, but didn't have any effect",
+      "doctor": 1,
+      "created_at": "2023-01-24T11:02:40.672334Z",
+      "id": 3
+  },
+  {
+    "title": "headache",
+    "content": "come here as soon as you can",
+    "doctor": 1,
+    "created_at": "2023-01-24T11:02:40.672334Z",
+    "id": 3
+},
+]
+
+newMessageContent: any = "";
+
+newMessage: any = '';
+
   firstName: any = localStorage.getItem('first_name');
   lastName: any = localStorage.getItem('last_name');
+  email: any = localStorage.getItem('email');
+  birth_data: any = localStorage.getItem('birth_date');
+  gender: any = localStorage.getItem('gender');
+  contact_number: any = localStorage.getItem('contact_number');
+  zip_code:any = localStorage.getItem('zip_code');
+  is_doctor:any = localStorage.getItem('is_doctor');
+
+  book: any | boolean = false;
   token: string | any;
   buttonContent: string | any = 'none';
   qIntro: any | [];
@@ -43,14 +89,44 @@ export class DashboardComponent implements OnInit {
   sympCtrl = new FormControl();
   filteredSymptoms: Observable<string[]> | any;
   symptomsSelected: string[] | any = [];
+  suggestedDr: any;
+  bookedHistory: any = [{
+    "file_ID": "324234",
+    "disease": "cold common",
+    "patient_doctor": 1006,
+    "appointment_date": "2023-01-26",
+    "date_created": "2023-01-26T00:00:58Z",
+    "detail": null
+},
+{
+  "file_ID": "324234",
+  "disease": "cold common",
+  "patient_doctor": 1006,
+  "appointment_date": "2023-01-26",
+  "date_created": "2023-01-26T00:00:58Z",
+  "detail": null
+},
+{
+  "file_ID": "324234",
+  "disease": "cold common",
+  "patient_doctor": 1006,
+  "appointment_date": "2023-01-26",
+  "date_created": "2023-01-26T00:00:58Z",
+  "detail": null
+},
+];
 
   @ViewChild('symptomsInput') symptomsInput: ElementRef<HTMLInputElement>  | any;
 
   constructor(private get: GetService, private post: PostService, private router:Router) {}
 
   ngOnInit(): void {
-    // this.token = this._Activatedroute.snapshot.paramMap.get('token');
     this.token = localStorage.getItem('token');
+
+    this.get.getBookHistory().subscribe((ret: any)=>{
+      this.bookedHistory = ret;
+      console.log("bookedHistory", this.bookedHistory);
+    })
 
     this.get.getQuestionIntro(this.token).subscribe((ret: any)=>{
       this.qIntro = ret;
@@ -65,6 +141,12 @@ export class DashboardComponent implements OnInit {
         map((symp: string | null) => (symp ? this._filter(symp) : this.symptoms.slice())),
       );
     })
+
+    this.get.getDoctorIdsForChat(this.token).subscribe((ret: any)=>{
+      this.doctors = ret;
+      console.log("doctors", ret);
+    })
+
   }
 
   buttonClicked(str: string){
@@ -141,12 +223,66 @@ export class DashboardComponent implements OnInit {
   }
 
   onLogOut(){
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('last_name');
+    localStorage.removeItem('birth_date');
+    localStorage.removeItem('gender');
+    localStorage.removeItem('zip_code');
+    localStorage.removeItem('first_name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('contact_number');
+    localStorage.removeItem('is_doctor');
+    localStorage.removeItem('id');
     this.router.navigate(['/'])
   }
 
   onLogoClick(){
     this.router.navigate(['/'])
+  }
+
+  onDoctorChat(i: any){
+    this.IsSelectDoctor = true;
+    this.doctorId = i;
+    const data = {
+      "title": "chat with doctor",
+      "content": ".",
+       "patient_doctor": this.doctorId
+  }
+    console.log("id",this.doctorId);
+    this.post.sendMessageDoctor(data, this.token).subscribe(
+      (res) => {
+        console.log("doctor message ticket", res);
+      }
+    )
+  }
+
+  onSendMessage(){
+    this.newMessage = this.newMessageContent;
+    console.log("new message",this.newMessage);
+
+    this.post.sendMessage(this.newMessage, this.token, this.doctorId).subscribe(
+      (res) => {
+        console.log("send message", res);
+      }
+    )
+  }
+
+  onBackChat(){
+    this.IsSelectDoctor = false;
+  }
+
+  onBook(){
+    this.book = true;
+    this.finishButton = false;
+
+    this.token = localStorage.getItem('token');
+    const data = {
+      "disease": this.disease,
+    }
+
+    this.post.suggestDoctor(data, this.token).subscribe((ret: any)=>{
+      this.suggestedDr = ret;
+    })
   }
 }
 

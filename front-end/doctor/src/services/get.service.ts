@@ -13,12 +13,18 @@ export class GetService {
   private _healthUrl = `${environment.API_URL}api/insurance-companies`;
   private _qIntroUrl = `${environment.API_URL}disease/question-intro/`;
   private _symptomsUrl = `${environment.API_URL}disease/symptoms/`;
+  private _doctorsIdForChatUrl = `${environment.API_URL}ticket/available-doctors/`;
+  private _bookHistoryUrl = `${environment.API_URL}disease/book-history/`;
 
     constructor(private httpClient: HttpClient){}
 
     getStates(){
       return this.httpClient.get<any>(this._stateUrl)
 
+    }
+
+    getBookHistory(){
+      return this.httpClient.get<any>(this._bookHistoryUrl)
     }
 
     getHealthInsuranceCompany(){
@@ -39,5 +45,12 @@ export class GetService {
         'Authorization' : 'JWT ' + access,
       });
       return this.httpClient.get<any>(this._symptomsUrl, {headers: httpHeaders});
+    }
+
+    getDoctorIdsForChat(access: any){
+      const httpHeaders = new HttpHeaders({
+        'Authorization' : 'JWT ' + access,
+      });
+      return this.httpClient.get<any>(this._doctorsIdForChatUrl, {headers: httpHeaders});
     }
   }

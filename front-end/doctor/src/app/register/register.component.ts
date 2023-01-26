@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
-  FormArray,
   Validators,
-  FormBuilder,
-  NgForm,
-  FormGroupDirective,
 } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
@@ -14,6 +10,8 @@ import { MatRadioChange } from '@angular/material/radio';
 import { Router } from '@angular/router';
 import { PostService } from 'src/services/post.service';
 import { GetService } from 'src/services/get.service';
+import { C } from '@angular/cdk/keycodes';
+import { threadId } from 'worker_threads';
 
 export interface DialogData {
   animal: string;
@@ -54,7 +52,7 @@ export class RegisterComponent implements OnInit {
   radioSelected: any;
   stateSelectedId: any;
   citySelectedId: any;
-  healthSelectedId: any = ' ';
+  healthSelectedId: any = null;
   genderSelectedId: any;
 
   states: [] | any;
@@ -62,6 +60,10 @@ export class RegisterComponent implements OnInit {
   health: [] | any;
 
   hide = true;
+  is_doctor: any;
+  doctor_code: any;
+  experties: any;
+  is_doctor_login : any;
 
   gender: choice[] = [
     { value: '1', viewValue: 'Female' },
@@ -114,7 +116,9 @@ export class RegisterComponent implements OnInit {
         ),
       ]),
       zipCode: new FormControl('', [Validators.required]),
-      insuranceId: new FormControl('', [Validators.required]),
+      insuranceId: new FormControl(''),
+      doctor_code: new FormControl(''),
+      experties: new FormControl(''),
     });
   }
 
@@ -123,6 +127,16 @@ export class RegisterComponent implements OnInit {
       nationalCode: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
+  }
+
+  isDoctorChange(data: MatRadioChange){
+    this.is_doctor = data.value;
+    console.log(this.is_doctor);
+  }
+
+  isDoctorLoginChange(data: MatRadioChange){
+    this.is_doctor_login = data.value;
+    console.log(this.is_doctor_login);
   }
 
   radioButtonChange(data: MatRadioChange) {
@@ -164,6 +178,18 @@ export class RegisterComponent implements OnInit {
     this.healthSelectedId = data;
   }
 
+
+  public cl() {
+    const invalid = [];
+    const controls = this.form1.controls;
+    for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+    }
+    console.log(invalid);
+}
+
   onSubmit1() {
     const signUpUserData = {
       personal_ID: this.form1.value.nationalCode,
@@ -178,6 +204,9 @@ export class RegisterComponent implements OnInit {
       has_health_insurance: this.hasHealth,
       zip_code: this.form1.value.zipCode,
       health_insurance_company: this.healthSelectedId,
+      is_doctor: this.is_doctor,
+      doctor_code: this.doctor_code,
+      experties: this.experties,
     };
 
     console.log('userData', signUpUserData);
@@ -185,7 +214,13 @@ export class RegisterComponent implements OnInit {
       next: (res) => {
         console.log('signUp res', res);
         localStorage.setItem('first_name', res.first_name);
-        localStorage.setItem('last_name', res.last_name);
+        localStorage.setItem('last_name',res.last_name);
+        localStorage.setItem('email',res.email);
+        localStorage.setItem('birth_date',res.birth_date);
+        localStorage.setItem('gender',res.gender);
+        localStorage.setItem('contact_number',res.contact_number);
+        localStorage.setItem('zip_code',res.zip_code);
+        localStorage.setItem('id',res.id);
         alert('You have signed up successfully ✅ Please log in now');
       },
       error: (err: any) => {
@@ -215,8 +250,13 @@ export class RegisterComponent implements OnInit {
       next: (res) => {
         console.log('Login res', res);
         localStorage.setItem('token', res.access);
+        localStorage.setItem('is_doctor', this.is_doctor_login);
         alert('You have logged ln successfully ✅ Welcome');
-        this.router.navigate(['/dashboard']);
+        if(this.is_doctor_login == 'false')
+          this.router.navigate(['/dashboard']);
+        else
+          this.router.navigate(['/doctorDashboard']);
+
       },
       error: (err: any) => {
         console.log('error', err.error.detail);

@@ -14,8 +14,39 @@ export class PostService {
   private _cityUrl = `${environment.API_URL}api/cities/`;
   private _forgotPasswordUrl = `${environment.API_URL}auth/forgot-password`;
   private _analysisUrl = `${environment.API_URL}disease/analysis/`;
+  private _sendMessageDoctorUrl = `${environment.API_URL}ticket/send-ticket/`;
+  private _suggestDoctorsUrl = `${environment.API_URL}disease/get-doctors/`;
+  private _bookDoctorUrl = `${environment.API_URL}disease/set-appointment/`;
 
     constructor(private httpClient: HttpClient,private router:Router){}
+    suggestDoctor(data: any, access: any){
+      const httpHeaders = new HttpHeaders({
+        'Authorization' : 'JWT ' + access,
+      });
+      return this.httpClient.post<any>(this._suggestDoctorsUrl, data, {headers: httpHeaders});
+    }
+
+    bookDoctor(data: any, access: any){
+      const httpHeaders = new HttpHeaders({
+        'Authorization' : 'JWT ' + access,
+      });
+      return this.httpClient.post<any>(this._bookDoctorUrl, data, {headers: httpHeaders});
+    }
+
+    sendMessageDoctor(data: any, access: any){
+      const httpHeaders = new HttpHeaders({
+        'Authorization' : 'JWT ' + access,
+      });
+      return this.httpClient.post<any>(this._sendMessageDoctorUrl, data, {headers: httpHeaders});
+    }
+
+    sendMessage(data: any, access: any, id:any){
+      const _sendMessageUrl = `http://localhost:8000/ticket/send-ticket/${id}/messages/`;
+      const httpHeaders = new HttpHeaders({
+        'Authorization' : 'JWT ' + access,
+      });
+      return this.httpClient.post<any>(_sendMessageUrl, data, {headers: httpHeaders});
+    }
 
     postAnalysis(data: any, access: any){
       const httpHeaders = new HttpHeaders({

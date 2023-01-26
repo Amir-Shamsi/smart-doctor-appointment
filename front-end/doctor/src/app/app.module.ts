@@ -32,7 +32,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +41,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     DashboardComponent,
+    DoctorDashboardComponent,
   ],
   imports: [
     BrowserModule,
