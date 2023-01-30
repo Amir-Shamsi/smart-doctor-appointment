@@ -1,5 +1,10 @@
 # Smart Doctor Appointment Booking App
 
+## Contributors:
+* [Zahra Moradi](https://github.com/zahra-moradii)
+* [Mohammad Keshavarzi](https://github.com/mohammadkeshavarzi)
+* [Amir Shamsi](https://github.com/Amir-Shamsi)
+
 ## Project Description
 
 Many deadly diseases are preventable and can be cured if treated at an early stage.
